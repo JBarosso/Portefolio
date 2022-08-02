@@ -1,0 +1,74 @@
+@use "../../variables" as *;
+@use "../../mixins" as *;
+@use "../var" as *;
+
+$class_flex-content-items:(
+    'center': 'center',
+    'spaceAround': 'space-around',
+    'spaceBetween': 'space-between',
+    'spaceEvenly': 'space-evenly',
+    'flexEnd': 'flex-end',
+    'flexStart': 'flex-start',
+);
+
+$class_flex-self:(
+    'center': 'center',
+    'flexEnd': 'flex-end',
+    'flexStart': 'flex-start',
+);
+
+$class_flex-direction:(
+    'column' : 'column',
+    'column-reverse' : 'column-reverse',
+    'row' : 'row',
+    'row-reverse' : 'row-reverse',
+);
+
+$class_flex-property:(
+    'jc' 'justify-content' $class_flex-content-items,
+    'ai' 'align-items' $class_flex-content-items,
+    'js' 'justify-self' $class_flex-self,
+    'as' 'align-self' $class_flex-self,
+    'dir' 'flex-direction' $class_flex-direction,
+);
+
+@include m_breakpoint-class(flex){
+
+    //? Css property
+    @each $prefix, $property, $values in $class_flex-property {
+        
+        @each $modifier, $value-prop in $values {
+            
+            &-#{$prefix}--#{$modifier} {
+                #{$property}: #{$value-prop};
+            }
+        }
+    }
+
+    //? Flex: 1 à 6
+    @for $i from 1 to 7 {
+        &--#{$i}{
+            flex: #{$i};
+        }
+    }
+
+    //? Flex order: 1 à 10
+    @for $i from 1 to 11 {
+        &--order-#{$i}{
+            order: #{$i};
+        }
+    }
+
+    //? FLEX BASIS
+    &--basis-full{
+        flex-basis: 100%;
+    }
+
+    &-wrap{
+        flex-wrap: wrap;
+    }
+
+    &-nowrap{
+        flex-wrap: nowrap;
+    }
+}

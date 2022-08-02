@@ -1,0 +1,162 @@
+//! Nom des animations
+$class_anim-names:(
+    'fadeIn',
+    'fadeInLeft',
+    'fadeInUp',
+    'fadeInRight',
+    'fadeInDown',
+    'fadeInLeft--xs',
+    'fadeInDown--xs',
+    'fadeInUp--xs',
+    'fadeInRight--xs',
+    'jello-horizontal',
+);
+
+//! Création des classes pour chaque nom
+@each $name in $class_anim-names {
+    .#{$name}{
+        animation-name: #{$name};
+        animation-fill-mode: both;
+    }
+}
+
+//! Keyframe pour les animations 
+/// Media to cancel animation on mobile to gain performance
+@media (min-width: 768px){  
+
+    //? fadeIn
+    @keyframes fadeIn {
+        from {
+            opacity: 0;
+        }
+
+        to {
+            opacity: 1;
+        }
+    }
+
+    //? fadeInLeft
+    @keyframes fadeInLeft {
+        from {
+            opacity: 0;
+            transform: translate3d(-100%, 0, 0);
+        }
+
+        to {
+            opacity: 1;
+            transform: translate3d(0, 0, 0);
+        }
+    }
+
+    //? fadeInUp
+    @keyframes fadeInUp {
+        from {
+            opacity: 0;
+            transform: translate3d(0, 100%, 0);
+        }
+
+        to {
+            opacity: 1;
+            transform: translate3d(0, 0, 0);
+        }
+    }
+
+    //? fadeInRight
+    @keyframes fadeInRight {
+        from {
+            opacity: 0;
+            transform: translate3d(100%, 0, 0);
+        }
+
+        to {
+            opacity: 1;
+            transform: translate3d(0, 0, 0);
+        }
+    }
+
+    //? fadeInDown
+    @keyframes fadeInDown {
+        from {
+            opacity: 0;
+            transform: translate3d(0, -100%, 0);
+        }
+
+        to {
+            opacity: 1;
+            transform: translate3d(0, 0, 0);
+        }
+    }
+
+    //? jello-horizontal
+    @keyframes jello-horizontal {
+        0% {
+          transform: scale3d(1, 1, 1) translateX(-50%);
+        }
+        30% {
+          transform: scale3d(1.25, 0.75, 1) translateX(-50%);
+        }
+        40% {
+          transform: scale3d(0.75, 1.25, 1) translateX(-50%);
+        }
+        50% {
+          transform: scale3d(1.15, 0.85, 1) translateX(-50%);
+        }
+        65% {
+          transform: scale3d(0.95, 1.05, 1) translateX(-50%);
+        }
+        75% {
+          transform: scale3d(1.05, 0.95, 1) translateX(-50%);
+        }
+        100% {
+          transform: scale3d(1, 1, 1) translateX(-50%);
+        }
+    }
+
+    //? fadeInUp--xs
+    @keyframes fadeInUp--xs {
+        0% {
+            opacity: 0;
+            transform: translateY(20px)
+        }
+        100% {
+            opacity: 1;
+            transform: translateY(0)
+        }
+    }
+
+    //? fadeInLeft--xs
+    @keyframes fadeInLeft--xs {
+        0% {
+            opacity: 0;
+            transform: translateX(-20px)
+        }
+        100% {
+            opacity: 1;
+            transform: translateX(0)
+        }
+    }
+    
+    //? fadeInRight--xs
+    @keyframes fadeInRight--xs {
+        0% {
+            opacity: 0;
+            transform: translateX(20px)
+        }
+        100% {
+            opacity: 1;
+            transform: translateX(0)
+        }
+    }
+
+    //? fadeInDown--xs
+    @keyframes fadeInDown--xs {
+        0% {
+            opacity: 0;
+            transform: translateY(-20px)
+        }
+        100% {
+            opacity: 1;
+            transform: translateY(0)
+        }
+    }
+}

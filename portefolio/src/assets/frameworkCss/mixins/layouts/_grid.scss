@@ -1,0 +1,41 @@
+
+//? Grid row
+/// Mixin qui permet de setup un grid-row pour chaque élément
+/// @group grid
+/// @param {nbr} $step [1] - De combien est séparé chaque élément
+/// @param {nbr} $start [1] - A quel order on le 1er élément démarre
+/// @param {list} $list - Liste des éléments dans l'ordre
+/// @example @include m_grid-row(1,1,'.toto','.tutu','.tata');
+@mixin m_grid-row($step: 1, $start: 1, $list...){
+    $count-1: $start;
+    $count-2: $count-1 + 1;
+    @each $elem in $list {
+        #{$elem}{
+            grid-row: #{$count-1}/#{$count-2};
+        }
+
+        $count-1: $count-1 + $step;
+        $count-2: $count-2 + $step;
+    }
+}
+
+
+//? Grid column
+/// Mixin qui permet de setup un grid-column pour chaque élément
+/// @group grid
+/// @param {nbr} $step [1] - De combien est séparé chaque élément
+/// @param {nbr} $start [1] - A quel order on le 1er élément démarre
+/// @param {list} $list - Liste des éléments dans l'ordre
+/// @example @include m_grid-column(1,1,'.toto','.tutu','.tata');
+@mixin m_grid-column($step: 1, $start: 1, $list...){
+    $count-1: $start;
+    $count-2: $count-1 + 1;
+    @each $elem in $list {
+        #{$elem}{
+            grid-column: #{$count-1}/#{$count-2};
+        }
+
+        $count-1: $count-1 + $step;
+        $count-2: $count-2 + $step;
+    }
+}

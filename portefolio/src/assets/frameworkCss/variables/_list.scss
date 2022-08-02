@@ -1,0 +1,21 @@
+@use './colors' as *;
+
+//? List
+$v_list-padding-value:              1.6rem!default;
+$v_list-ul:                         0 0 0 $v_list-padding-value!default;
+
+$v_list-li:                         0.2rem 0!default;
+
+$v_list-puce-top:                   1rem!default;
+$v_list-puce-size:                  0.5rem!default;
+$v_list-puce-color:                 $v_color-primary!default;
+$v_list-puce-radius:                10rem!default;
+
+// A utiliser pour des boucles
+$v_list-var:(
+    $v_list-ul,
+    $v_list-li,
+    $v_list-puce-size,
+    $v_list-puce-color,
+    $v_list-puce-radius
+)!default;

@@ -1,0 +1,21 @@
+//? VARIABLE GLOBALES
+@use '../variables' as *;
+@use '../vendors/rfs' as *;
+
+
+//? Génère l'import de la google font
+/// Mixin pour appeler l'import de $v_font-family ou d'une font spécifique
+/// @group fonts
+/// @param {string} $font-name - une variable temporelle qui définit au bout de combien de temps la première animation se lance
+/// @example @include m_font-family("Montserrat");
+@mixin m_font-family($font-name:$v_font-family){
+
+    @each $name in $font-name{
+
+        @if map-has-key($v_fonts-google, $name) {
+            
+            $import: map-get($v_fonts-google, $name);
+             @import url('#{$import}');
+        }
+    }
+}

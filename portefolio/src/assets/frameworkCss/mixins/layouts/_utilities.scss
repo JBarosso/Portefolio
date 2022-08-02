@@ -1,0 +1,146 @@
+@use '../../variables' as *;
+@use './flex' as *;
+@use '../responsive' as *;
+
+//? Mixin container
+/// Mixin qui permet de setup le padding et le max-width d'un élément pour qui soit identique au container du site
+/// @group layout
+/// @param {nbr} $max-width [$v_container-max-width] - Taille du container du site
+/// @param {nbr} $padding [$v_container-padding] - Padding du container du site
+/// @example @include m_container();
+@mixin m_container($max-width: $v_container-max-width, $padding: $v_container-padding){
+    width: 100%;
+    max-width: $max-width;
+    padding: 0 $padding;
+    margin: 0 auto;
+}
+
+//? Mixin Container flex
+/// Mixin qui permet de setup le padding et le max-width d'un élément pour qui soit identique au container du site et y rajoute le flex
+/// @group layout
+/// @param {nbr} $max-width [$v_container-max-width] - Taille du container du site
+/// @param {dir} $padding [$v_container-padding] - Padding du container du site
+/// @param {list} $flex - Utiliser la mixin m_flex();
+/// @example @include m_container-flex();
+@mixin m_container-flex($max-width: $v_container-max-width, $padding: $v_container-padding ,$flex...){
+    @include m_container($max-width, $padding);
+    @include m_flex($flex...);
+}
+
+//? MIXIN POUR CENTRER UN ELEMENT
+//* Rentrer X ou Y en majuscule pour changer l'orientation
+//* Par defaut on centre en X et Y
+/// Mixin qui permet de centrer un élément avec le translate
+/// @group layout
+/// @param {dir} $direction [all] - Les sélecteurs de direction sont : X,Y,all
+/// @param {list} $more - Permet d'ajouter des propriétés de transform (ex: scale)
+/// @example @include m_translate-center(X,scale(1.1));
+@mixin m_translate-center($direction: all, $more...) {
+    @if $direction == all{
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%, -50%) $more;
+    } 
+    @else{
+        transform: translate+#{$direction}(-50%) $more;
+        @if $direction == X {
+            left: 50%;
+        } 
+        @else if $direction == Y {
+            top: 50%;
+        }
+    }
+}
+
+//? Mixin de gestion gauche droite de 2 cibles
+/// Mixin qui permet de faire un gauche droite avec 2 éléments
+/// @group layout
+/// @param {nbr} $img-width [50rem] - Taille en max-width du 1er élément
+/// @param {%} $texte-basis [50%] - Taille en flex-basis du 2em élément
+/// @param {nbr} $gap [3rem] - grid-gap qui sépare les éléments
+/// @param {dir} $cible1 [img] - 1er élément
+/// @param {dir} $cible2 ['.richtext'] - 2em élément
+/// @example @include m_mw-basis(35rem, 45%, 3rem 5rem, '.toto', '.tutu');
+@mixin m_mw-basis($img-width: 50rem, $texte-basis: 50%, $gap: 3rem, $cible1: '&__left', $cible2: '&__right', $break:false){
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: space-between;
+    align-items: flex-start;
+    grid-gap: $gap;
+    
+    #{$cible1}{
+        width: 100%;
+        max-width: $img-width;
+        margin: 0 auto;
+    }
+
+    #{$cible2}{
+        flex: 1;
+        flex-basis: $texte-basis;
+    }
+
+    @if $break{
+
+        @include m_breakpoint(max,$break){
+            
+            #{$cible1}{
+                max-width: 100%;
+            }
+        }
+    }
+}
+
+@mixin m_mw-basis-class($img-width: 50rem, $texte-basis: 50%, $cible1: '&__left', $cible2: '&__right', $break:false){
+    
+    #{$cible1}{
+        width: 100%;
+        max-width: $img-width;
+        margin: 0 auto;
+    }
+
+    #{$cible2}{
+        flex: 1;
+        flex-basis: $texte-basis;
+    }
+
+    @if $break{
+
+        @include m_breakpoint(max,$break){
+            
+            #{$cible1}{
+                max-width: 100%;
+            }
+        }
+    }
+}
+
+//? Met la même taille pour la width et la height
+/// Met la même taille pour la width et la height
+/// @group layout
+/// @param {rem} $width - Valeur de la width
+/// @param {rem} $height [$width] - La height prend par default la taille de la width
+/// @example @include m_box(10rem);
+@mixin m_box($width, $height: $width){
+    width: $width;
+    height: $height;
+}
+
+/// Met la même taille pour la maw-width et la height
+/// @group layout
+/// @param {rem} $width - Valeur de la width
+/// @param {rem} $height [$width] - La height prend par default la taille de la width
+/// @example @include m_box-mw(10rem);
+@mixin m_box-mw($width, $height: $width){
+    @include m_max-width($width);
+    height: $height;
+}
+
+//? Width 100% et paramétrer la max-width
+/// Met un width de 100% avec une max-width définie
+/// @group layout
+/// @param {nbr} $max-width - Valeur de la max-width
+/// @example @include m_max-width(30rem);
+@mixin m_max-width($max-width){
+    width: 100%;
+    max-width: $max-width;
+}

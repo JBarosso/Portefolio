@@ -1,0 +1,189 @@
+//* Font size
+$v_font-size-base: 1.6rem !default;
+$v_font-size-base-responsive: $v_font-size-base - .2rem !default;
+$v_font-size-title: $v_font-size-base !default;
+
+
+//? Font size des titres
+$v_h1-font-size-multiplier: 2.5!default;
+$v_h2-font-size-multiplier: 2!default;
+$v_h3-font-size-multiplier: 1.75!default;
+$v_h4-font-size-multiplier: 1.5!default;
+$v_h5-font-size-multiplier: 1.25!default;
+$v_h6-font-size-multiplier: 1!default;
+
+$v_h1-font-size: $v_font-size-title * $v_h1-font-size-multiplier !default;
+$v_h2-font-size: $v_font-size-title * $v_h2-font-size-multiplier !default;
+$v_h3-font-size: $v_font-size-title * $v_h3-font-size-multiplier !default;
+$v_h4-font-size: $v_font-size-title * $v_h4-font-size-multiplier !default;
+$v_h5-font-size: $v_font-size-title * $v_h5-font-size-multiplier !default;
+$v_h6-font-size: $v_font-size-title * $v_h6-font-size-multiplier !default;
+
+$v_font-sizes: (
+  1: $v_h1-font-size,
+  2: $v_h2-font-size,
+  3: $v_h3-font-size,
+  4: $v_h4-font-size,
+  5: $v_h5-font-size,
+  6: $v_h6-font-size
+) !default;
+
+//? Variation de font size pour titres
+$v_h1-font-size--xs : $v_h1-font-size * 0.6!default;
+$v_h1-font-size--sm : $v_h1-font-size * 0.9!default;
+$v_h1-font-size--md : $v_h1-font-size * 1.13!default;
+$v_h1-font-size--lg : $v_h1-font-size * 1.25!default;
+$v_h1-font-size--xl : $v_h1-font-size * 1.4!default;
+$v_h1-font-size--2xl : $v_h1-font-size * 1.5!default;
+$v_h1-font-size--3xl : $v_h1-font-size * 2!default;
+$v_h1-font-size--4xl : $v_h1-font-size * 2.5!default;
+
+$v_h1-font-sizes:(
+  xs: $v_h1-font-size--xs,
+  sm: $v_h1-font-size--sm,
+  md: $v_h1-font-size--md,
+  lg: $v_h1-font-size--lg,
+  xl: $v_h1-font-size--xl,
+  2xl: $v_h1-font-size--2xl,
+  3xl: $v_h1-font-size--3xl,
+  4xl: $v_h1-font-size--4xl,
+)!default;
+
+$v_h2-font-size--xs : $v_h2-font-size * 0.6!default;
+$v_h2-font-size--sm : $v_h2-font-size * 0.9!default;
+$v_h2-font-size--md : $v_h2-font-size * 1.13!default;
+$v_h2-font-size--lg : $v_h2-font-size * 1.25!default;
+$v_h2-font-size--xl : $v_h2-font-size * 1.4!default;
+$v_h2-font-size--2xl : $v_h2-font-size * 1.5!default;
+$v_h2-font-size--3xl : $v_h2-font-size * 2!default;
+$v_h2-font-size--4xl : $v_h2-font-size * 2.5!default;
+
+$v_h2-font-sizes:(
+  xs: $v_h2-font-size--xs,
+  sm: $v_h2-font-size--sm,
+  md: $v_h2-font-size--md,
+  lg: $v_h2-font-size--lg,
+  xl: $v_h2-font-size--xl,
+  2xl: $v_h2-font-size--2xl,
+  3xl: $v_h2-font-size--3xl,
+  4xl: $v_h2-font-size--4xl,
+)!default;
+
+$v_h3-font-size--xs : $v_h3-font-size * 0.6!default;
+$v_h3-font-size--sm : $v_h3-font-size * 0.9!default;
+$v_h3-font-size--md : $v_h3-font-size * 1.13!default;
+$v_h3-font-size--lg : $v_h3-font-size * 1.25!default;
+$v_h3-font-size--xl : $v_h3-font-size * 1.4!default;
+$v_h3-font-size--2xl : $v_h3-font-size * 1.5!default;
+$v_h3-font-size--3xl : $v_h3-font-size * 2!default;
+$v_h3-font-size--4xl : $v_h3-font-size * 2.5!default;
+
+$v_h3-font-sizes:(
+  xs: $v_h3-font-size--xs,
+  sm: $v_h3-font-size--sm,
+  md: $v_h3-font-size--md,
+  lg: $v_h3-font-size--lg,
+  xl: $v_h3-font-size--xl,
+  2xl: $v_h3-font-size--2xl,
+  3xl: $v_h3-font-size--3xl,
+  4xl: $v_h3-font-size--4xl,
+)!default;
+
+$v_h4-font-size--xs : $v_h4-font-size * 0.6!default;
+$v_h4-font-size--sm : $v_h4-font-size * 0.9!default;
+$v_h4-font-size--md : $v_h4-font-size * 1.13!default;
+$v_h4-font-size--lg : $v_h4-font-size * 1.25!default;
+$v_h4-font-size--xl : $v_h4-font-size * 1.4!default;
+$v_h4-font-size--2xl : $v_h4-font-size * 1.5!default;
+$v_h4-font-size--3xl : $v_h4-font-size * 2!default;
+$v_h4-font-size--4xl : $v_h4-font-size * 2.5!default;
+
+$v_h4-font-sizes:(
+  xs: $v_h4-font-size--xs,
+  sm: $v_h4-font-size--sm,
+  md: $v_h4-font-size--md,
+  lg: $v_h4-font-size--lg,
+  xl: $v_h4-font-size--xl,
+  2xl: $v_h4-font-size--2xl,
+  3xl: $v_h4-font-size--3xl,
+  4xl: $v_h4-font-size--4xl,
+)!default;
+
+$v_h5-font-size--xs : $v_h5-font-size * 0.6!default;
+$v_h5-font-size--sm : $v_h5-font-size * 0.9!default;
+$v_h5-font-size--md : $v_h5-font-size * 1.13!default;
+$v_h5-font-size--lg : $v_h5-font-size * 1.25!default;
+$v_h5-font-size--xl : $v_h5-font-size * 1.4!default;
+$v_h5-font-size--2xl : $v_h5-font-size * 1.5!default;
+$v_h5-font-size--3xl : $v_h5-font-size * 2!default;
+$v_h5-font-size--4xl : $v_h5-font-size * 2.5!default;
+
+$v_h5-font-sizes:(
+  xs: $v_h5-font-size--xs,
+  sm: $v_h5-font-size--sm,
+  md: $v_h1-font-size--md,
+  lg: $v_h5-font-size--lg,
+  xl: $v_h5-font-size--xl,
+  2xl: $v_h5-font-size--2xl,
+  3xl: $v_h5-font-size--3xl,
+  4xl: $v_h5-font-size--4xl,
+)!default;
+
+$v_h6-font-size--xs : $v_h6-font-size * 0.6!default;
+$v_h6-font-size--sm : $v_h6-font-size * 0.9!default;
+$v_h6-font-size--md : $v_h6-font-size * 1.13!default;
+$v_h6-font-size--lg : $v_h6-font-size * 1.25!default;
+$v_h6-font-size--xl : $v_h6-font-size * 1.4!default;
+$v_h6-font-size--2xl : $v_h6-font-size * 1.5!default;
+$v_h6-font-size--3xl : $v_h6-font-size * 2!default;
+$v_h6-font-size--4xl : $v_h6-font-size * 2.5!default;
+
+$v_h6-font-sizes:(
+  xs: $v_h6-font-size--xs,
+  sm: $v_h6-font-size--sm,
+  md: $v_h6-font-size--md,
+  lg: $v_h6-font-size--lg,
+  xl: $v_h6-font-size--xl,
+  2xl: $v_h6-font-size--2xl,
+  3xl: $v_h6-font-size--3xl,
+  4xl: $v_h6-font-size--4xl,
+)!default;
+
+$v_font-sizes-titres:(
+  1: $v_h1-font-sizes,
+  2: $v_h2-font-sizes,
+  3: $v_h3-font-sizes,
+  4: $v_h4-font-sizes,
+  5: $v_h5-font-sizes,
+  6: $v_h6-font-sizes,
+);
+
+//? Font size du texte
+$v_font-size-texte-multiplier--xs: 0.6!default;
+$v_font-size-texte-multiplier--sm: 0.9!default;
+$v_font-size-texte-multiplier--md: 1.13!default;
+$v_font-size-texte-multiplier--lg: 1.25!default;
+$v_font-size-texte-multiplier--xl: 1.4!default;
+$v_font-size-texte-multiplier--2xl: 1.5!default;
+$v_font-size-texte-multiplier--3xl: 2!default;
+$v_font-size-texte-multiplier--4xl: 2.5!default;
+
+$v_font-size-text--xs: $v_font-size-base * $v_font-size-texte-multiplier--xs !default;
+$v_font-size-text--sm: $v_font-size-base * $v_font-size-texte-multiplier--sm !default;
+$v_font-size-text--md: $v_font-size-base * $v_font-size-texte-multiplier--md !default;
+$v_font-size-text--lg: $v_font-size-base * $v_font-size-texte-multiplier--lg !default;
+$v_font-size-text--xl: $v_font-size-base * $v_font-size-texte-multiplier--xl !default;
+$v_font-size-text--2xl: $v_font-size-base * $v_font-size-texte-multiplier--2xl !default;
+$v_font-size-text--3xl: $v_font-size-base * $v_font-size-texte-multiplier--3xl !default;
+$v_font-size-text--4xl: $v_font-size-base * $v_font-size-texte-multiplier--4xl !default;
+
+$v_font-sizes-texte: (
+  xs: $v_font-size-text--xs,
+  sm: $v_font-size-text--sm,
+  md: $v_font-size-text--md,
+  lg: $v_font-size-text--lg,
+  xl: $v_font-size-text--xl,
+  2xl: $v_font-size-text--2xl,
+  3xl: $v_font-size-text--3xl,
+  4xl: $v_font-size-text--4xl,
+) !default;

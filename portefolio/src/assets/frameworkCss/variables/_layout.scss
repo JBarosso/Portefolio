@@ -1,0 +1,63 @@
+@use "sass:math";
+
+//? sectionContainer
+$v_container-max-width:             140rem!default;
+$v_container-padding:               1.6rem!default;
+$v_container-length:                $v_container-max-width - $v_container-padding * 2!default;
+$v_container-paddings:              0 $v_container-padding !default;
+$v_container-justify-content:       space-between !default;
+
+$v_container-width-xs:  math.div($v_container-max-width, 1.5)!default;
+$v_container-width-sm:  math.div($v_container-max-width, 1.2)!default;
+$v_container-width-md:  $v_container-max-width!default;
+$v_container-width-lg:   $v_container-max-width + math.div($v_container-max-width, 6)!default;
+$v_container-width-xl:  $v_container-max-width + math.div($v_container-max-width, 4)!default;
+$v_container-width-xxl:  $v_container-max-width + math.div($v_container-max-width, 2)!default;
+$v_container-width-full:  100%!default;
+
+$v_container-widths:(
+    'xs': $v_container-width-xs,
+    'sm': $v_container-width-sm,
+    'md': $v_container-width-md,
+    'lg': $v_container-width-lg,
+    'xl': $v_container-width-xl,
+    'xxl': $v_container-width-xxl,
+    'full': $v_container-width-full,
+)!default;
+
+//? Max width
+$v_max-w--xs:  math.div($v_container-length , 6)!default;
+$v_max-w--sm:  math.div($v_container-length , 4)!default;
+$v_max-w--md:  math.div($v_container-length , 3)!default;
+$v_max-w--lg:  math.div($v_container-length , 2)!default;
+$v_max-w--xl:  math.div($v_container-length , 3 ) * 2!default;
+$v_max-w--xxl: math.div($v_container-length , 4 ) * 3!default;
+
+// A utiliser pour des boucles
+$v_max-width-val:(
+    xs:  $v_max-w--xs,
+    sm:  $v_max-w--sm,
+    md:  $v_max-w--md,
+    lg:  $v_max-w--lg,
+    xl:  $v_max-w--xl,
+    xxl: $v_max-w--xxl
+)!default;
+
+//? GRID
+// grid-gap
+$v_grid-gap-xs:   .8rem !default;
+$v_grid-gap-sm:   1.6rem !default;
+$v_grid-gap-md:   3rem !default;
+$v_grid-gap-lg:   5rem !default;
+$v_grid-gap-xl:   10rem !default;
+$v_grid-gap-xxl:  15rem !default;
+
+// A utiliser pour des boucles
+$v_grid-gaps:(
+    xs:  $v_grid-gap-xs,
+    sm:  $v_grid-gap-sm,
+    md:  $v_grid-gap-md,
+    lg:  $v_grid-gap-lg,
+    xl:  $v_grid-gap-xl,
+    xxl: $v_grid-gap-xxl
+)!default;

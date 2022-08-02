@@ -1,0 +1,29 @@
+@use "../../variables" as *;
+@use "../../mixins" as *;
+@use "../var" as *;
+
+$class_cols-type:(
+    '.flex': 'flex',
+    '.grid': 'grid',
+    '.grid-fill': 'grid-fill',
+    '.section': 'classic',
+);
+
+@each $type-cols, $type in $class_cols-type {
+    
+    #{$type-cols}{
+
+        @for $nbr from 2 to 9 {
+            
+            &-col#{$nbr}{
+
+                @each $modifier, $break in $class_elem-width {
+
+                    &--#{$modifier}{
+                        @include m_cols($nbr,$type,$break);
+                    }
+                }
+            }
+        }
+    }
+}

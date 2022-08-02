@@ -1,0 +1,48 @@
+@use "sass:math";
+
+//? Variables global
+@use '../../variables' as *;
+@use '../responsive' as *;
+@use '../functions' as *;
+
+
+//? Mixins génération de colonne 
+/// Mixins génération de colonne 
+/// @group layout
+/// @param {Nombre} $cols - Nombre de colonne souhaité
+/// @param {type} $type [classic] - Type de colonne souhaité (flex,classic,grid,grid-fill) 
+/// @param {rem} $break [15rem] - A quel width des élements on souhaite qu'il passe à la ligne 
+/// @example @include m_cols(3,flex,30rem);
+@mixin m_cols($cols, $type: classic, $break: 15rem){
+    $clamp: clamp(100% / (#{$cols} + 1) + 0.1%, #{$break}, 100%);
+
+    @if $type == "grid"{
+        grid-template-columns: repeat(auto-fit, minmax(
+            #{$clamp}
+            , 1fr)
+        );
+    }
+
+    @if $type == "grid-fill"{
+        grid-template-columns: repeat(auto-fill, minmax(
+            #{$clamp}
+            , 1fr)
+        );
+    }
+
+    @if $type == "flex"{
+
+        &>*{
+            flex: 1;
+            flex-basis: #{$clamp};
+        }
+    }
+
+    @if $type == "classic"{
+
+        &>*{
+            width: 100%;
+            max-width: #{$clamp};
+        }
+    }
+}

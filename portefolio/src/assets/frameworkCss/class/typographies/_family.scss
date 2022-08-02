@@ -1,0 +1,17 @@
+@use "../../variables/" as *;
+@use "../../mixins/" as *;
+@use "../var" as *;
+@use 'sass:string';
+
+.font{
+
+    @each $family, $import in $v_fonts-google {
+
+        $family: string.to-lower-case($family);
+        $family: m_str-remove-whitespace($family);
+
+        &--#{$family}{
+            font-family: $family;
+        }
+    }
+}

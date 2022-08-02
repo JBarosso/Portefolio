@@ -1,0 +1,155 @@
+@use "sass:math" as *;
+
+//? Variables global
+@use '../variables' as *;
+
+
+//? direction x, y, top, right, bottom, left
+$class_direction-all:(
+    'x' 'right' 'left',
+    'y' 'top' 'bottom',
+    't' 'top',
+    'r' 'right',
+    'b' 'bottom',
+    'l' 'left'
+);
+
+$class_direction-axes:(
+    'x',
+    'y'
+);
+
+//? Collection pour générer des querys
+$class_query-direction:(
+    min,
+    max
+);
+
+//? Collection pour générer des variantions de couleurs
+$class_color-variants:(
+    900 : 0.1,
+    800 : 0.2,
+    700 : 0.3,
+    600 : 0.4,
+    500 : 0.5,
+    400 : 0.6,
+    300 : 0.7,
+    200 : 0.8,
+    100 : 0.9,
+     50 : 0.95,
+);
+
+//? Collection position css
+$class_positions:(
+    relative,
+    fixed,
+    absolute,
+    initial,
+    sticky,
+    inherit
+);
+
+//? Collection display css
+$class_displays:(
+    'hidden': none,
+    'flex': flex,
+    'grid': grid,
+    'block': block,
+    'inline-block': inline-block,
+    'inline': inline,
+    'inline-table': inline-table,
+    'inline-flex': inline-flex,
+    'inline-grid': inline-grid,
+    'table': table,
+    'contents': contents,
+);
+
+//? Collection flex-basis de mw-fb
+$class_basis-values:(
+    xs: 15%,
+    sm: 25%,
+    md: 33%,
+    lg: 50%,
+    xl: 66%,
+    xxl: 75%,
+);
+
+//? Collection max-width de mw-fb
+$class_elem-width:(
+    xs: div($v_container-length, 10),
+    sm: div($v_container-length, 8),
+    md: div($v_container-length, 6),
+    lg: div($v_container-length, 4),
+    xl: div($v_container-length, 2 ),
+    xxl: div($v_container-length, 1.5),
+);
+
+//? Border
+$class_border-widths:(
+    xs: .1rem,
+    sm: .2rem,
+    md: .3rem,
+    lg: .5rem,
+    xl: .6rem,
+    xxl: 1rem,
+);
+
+$class_border-style:(
+    dashed,
+    dotted,
+    solid,
+);
+
+$class_border-radius-none-y:(
+    top,
+    bottom
+);
+
+$class_border-radius-none-x:(
+    right,
+    left
+);
+
+//? Text property
+$class_text-aligns:(
+    left,
+    justify,
+    right,
+    center
+);
+
+$class_text-transforms:(
+    uppercase,
+    lowercase,
+    capitalize,
+);
+
+$class_text-overflows:(
+    ellipsis,
+    clip,
+);
+
+$class_text-properties:(
+    'a' 'align' $class_text-aligns,
+    'c' 'color' $v_colors,
+    't' 'transform' $class_text-transforms,
+    'o' 'overflow' $class_text-overflows,
+);
+
+$class_font-styles:(
+    italic
+);
+
+$class_overflow-properties:(
+    auto,
+    hidden,
+    clip,
+    visible,
+    scroll,
+);
+
+$class_floats:(
+    'right',
+    'left',
+    'none',
+);

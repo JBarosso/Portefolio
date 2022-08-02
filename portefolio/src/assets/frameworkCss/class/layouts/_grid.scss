@@ -1,0 +1,42 @@
+@use "../../variables" as *;
+@use "../../mixins" as *;
+@use "../var" as *;
+
+$class_grid-cible:(
+    col: column,
+    row: row
+);
+
+@include m_breakpoint-class(grid){
+
+    @each $cible, $css in $class_grid-cible {
+
+        &-#{$cible}{
+
+            &--full{
+                grid-#{$css}: 1/-1;
+            }
+
+            @for $i from 2 to 11 {
+                
+                &--span-#{$i}{
+                    grid-#{$css}: span #{$i};
+                }
+            }
+        }
+    }
+
+    @each $break, $value in $v_grid-gaps {
+        &-gap--#{$break}{
+            grid-gap: $value;
+        }
+
+        &-col-gap--#{$break}{
+            grid-column-gap: $value;
+        }
+
+        &-row-gap--#{$break}{
+            grid-row-gap: $value;
+        }
+    }
+}

@@ -1,0 +1,16 @@
+@use "../variables/" as *;
+@use "../mixins/" as *;
+@use "./var" as *;
+
+@each $class, $values in $v_filters {
+
+    @each $modifier, $val in $values{
+
+        @include m_breakpoint-class($class){
+
+            &--#{$modifier}{
+                filter: #{$class}($val);
+            }
+        }
+    }
+}

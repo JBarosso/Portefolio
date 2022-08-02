@@ -1,0 +1,36 @@
+@use './colors' as *;
+@use './animation' as *;
+
+//? Paramètre button standard
+$v_button-display:                inline-block !default;
+$v_button-radius:                 10rem !default;
+
+$v_button-padding-value:          .8rem!default;
+$v_button-padding:                $v_button-padding-value $v_button-padding-value*2 !default;
+
+$v_button-color:                  $v_color-primary !default;
+$v_button-text-color:             $v_button-color !default;
+$v_button-background:             $v_button-color !default;
+
+$v_button-border-width:           .1rem !default;
+$v_button-border-style:           solid !default;
+$v_button-border-color:           $v_button-color !default;
+
+$v_button-transition:             $v_transition-default !default;
+$v_button-type:                   fill!default;
+$v_button-outline-background:     transparent !default;
+
+//? A utiliser pour des boucles
+$v_button-standard:(
+    $v_button-display,
+    $v_button-radius,
+    $v_button-padding,
+    $v_button-text-color,
+    $v_button-color,
+    $v_button-border-width,
+    $v_button-border-style,
+    $v_button-border-color,
+    $v_button-background,
+    $v_button-outline-background,
+    $v_button-transition
+)!default;

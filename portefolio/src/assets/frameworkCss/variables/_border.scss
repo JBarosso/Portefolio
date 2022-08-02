@@ -1,0 +1,17 @@
+$v_border-radius-xs:  .4rem!default;
+$v_border-radius-sm:  .8rem!default;
+$v_border-radius-md:  1rem!default;
+$v_border-radius-lg:  2rem!default;
+$v_border-radius-xl:  6rem!default;
+$v_border-radius-xxl: 100rem!default;
+
+// A utiliser pour des boucles
+$v_border-radius:(
+    'none': 0,
+    xs:  $v_border-radius-xs,
+    sm:  $v_border-radius-sm,
+    md:  $v_border-radius-md,
+    lg:  $v_border-radius-lg,
+    xl:  $v_border-radius-xl,
+    xxl: $v_border-radius-xxl
+)!default;

@@ -1,0 +1,66 @@
+@use '../variables' as *;
+@use '../mixins' as *;
+@use '../vendors/rfs' as *;
+
+
+a,
+a:hover,
+a:focus{
+    text-decoration: $v_link-decoration;
+    outline: none;
+}
+
+a{
+    transition: $v_transition-default;
+}
+
+html{
+    font-size: 62.5%;
+}
+
+body{
+    font-size: $v_font-size-base;
+    color: $v_color-body;
+    font-family: $v_font-family-body;
+    @include m_breakpoint(max, md){
+        font-size: $v_font-size-base-responsive;
+    }
+}
+
+@for $i from 1 to 4 {
+    h#{$i}{
+        font-family: $v_font-family-titre;
+    }
+}
+
+table{
+    display: block;
+    overflow: auto;
+    max-width: calc(100vw - (2 * #{$v_container-padding}));
+}
+
+//? Génération des font-size pour les titres
+@each $titre, $value in $v_font-sizes{
+    
+    h#{$titre}{
+        @include rfs_font-size($value);
+    }
+}
+
+//? Margin picto bem
+@if $v_enable-picto-margin-class{
+
+    a[class*="picto__before"]{
+
+        &::before{
+            margin-right: $v_picto-before-margin;
+        }
+    }
+
+    a[class*="picto__after"]{
+
+        &::after{
+            margin-left: $v_picto-after-margin;
+        }
+    }
+}

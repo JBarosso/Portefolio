@@ -1,0 +1,36 @@
+@use "../../variables" as *;
+@use "../../mixins" as *;
+@use "../var" as *;
+
+
+//? Class pour gestion de 2 éléments gauche droite max-width flex basis
+.mw-basis{
+
+    @each $basis-modifier, $basis-val in $class_basis-values {
+        
+        @each $mw-modifier, $mw-val in $class_elem-width {
+        
+            &--#{$mw-modifier}-#{$basis-modifier}{
+
+                .mw-basis{
+                    @include m_mw-basis-class($mw-val,$basis-val);
+                }
+            }
+
+            &-reverse{
+
+                &--#{$mw-modifier}-#{$basis-modifier}{
+
+                    .mw-basis-reverse{
+                        @include m_mw-basis-class($mw-val,$basis-val, '&__right', '&__left');
+                    }
+                }
+            }
+        }
+    }
+}
+
+//? Créé le container du site avec flex
+.container{
+    @include m_container();
+}

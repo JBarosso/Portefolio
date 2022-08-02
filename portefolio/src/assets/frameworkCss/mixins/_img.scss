@@ -1,0 +1,25 @@
+//? Initialise de base object fit cover et center
+/// Initialise de base object fit cover et center
+/// @group img
+/// @param {string} $fit [cover] - propriété du object-fit
+/// @param {string} $position [center] - propriété du object-position
+/// @example @include m_object-img();
+@mixin m_object-img($fit: cover, $position: center){
+    object-fit: $fit;
+    object-position: $position;
+}
+
+//? Met un background-image
+/// Met un background-image avec toutes les propriétés du background
+/// @group img
+/// @param {url} $url - url de votre image
+/// @param {string} $size [cover] - propriété de background-size
+/// @param {string} $position [center] - propriété de background-position
+/// @param {string} $size [no-repeat] - propriété de background-repeat
+/// @example @include m_background-image('img/toto.png', 'contain');
+@mixin m_background-image($url, $size: cover, $position: center, $repeat: no-repeat){
+    background-image: url($url);
+    background-repeat: $repeat;
+    background-size: $size;
+    background-position: $position;
+}

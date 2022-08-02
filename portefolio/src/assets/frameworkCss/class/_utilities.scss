@@ -1,0 +1,71 @@
+@use "../variables/" as *;
+@use "../mixins/" as *;
+@use "./var" as *;
+
+//? Visible / Hidden
+@each $class, $property in $class_displays {
+    
+    @include m_breakpoint-class($class){
+        display: $property !important;
+    }
+}
+
+//? Position
+@each $property in $class_positions {
+    
+    @include m_breakpoint-class($property){
+        position: $property;
+    }
+}
+
+//? Pointer event
+@include m_breakpoint-class('pointer-events'){
+    
+    &--none{
+        pointer-events: none;
+    }
+}
+
+//? Iframe responsive
+.iframe-responsive{
+    position: relative;
+    padding-bottom: 56.25%; /*16:9*/
+    height: 0;
+    overflow: hidden;
+
+    iframe{
+        position: absolute;
+        top:0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+    }
+}
+
+//? Overflow
+@include m_breakpoint-class(overflow){
+
+    @each $property in $class_overflow-properties {
+        
+        &--#{$property}{
+            overflow: $property;
+        }
+
+        @each $direction in $class_direction-axes {
+
+            &--#{$direction}-#{$property}{
+                overflow-#{$direction}: $property;
+            }
+        }
+    }
+}
+
+//? Float
+@include m_breakpoint-class(float){
+
+    @each $property in $class_floats {
+        &--#{$property}{
+            float: $property;
+        }
+    }
+}

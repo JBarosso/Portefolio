@@ -1,0 +1,26 @@
+$v_breakpoint-xs:  375!default;
+$v_breakpoint-sm:  576!default;
+$v_breakpoint-md:  768!default;
+$v_breakpoint-lg:  992!default;
+$v_breakpoint-xl:  1200!default;
+$v_breakpoint-xxl: 1400!default;
+
+// A utiliser pour des boucles
+$v_breakpoints:(
+    xs:  $v_breakpoint-xs,
+    sm:  $v_breakpoint-sm,
+    md:  $v_breakpoint-md,
+    lg:  $v_breakpoint-lg,
+    xl:  $v_breakpoint-xl,
+    xxl: $v_breakpoint-xxl
+)!default;
+
+$v_breakpoints-class:(
+    '.' : 0,
+    '.xs\\:':  $v_breakpoint-xs,
+    '.sm\\:':  $v_breakpoint-sm,
+    '.md\\:':  $v_breakpoint-md,
+    '.lg\\:':  $v_breakpoint-lg,
+    '.xl\\:':  $v_breakpoint-xl,
+    '.xxl\\:': $v_breakpoint-xxl
+)!default;

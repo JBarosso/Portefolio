@@ -1,0 +1,91 @@
+@use "sass:math";
+
+@use '../variables' as *;
+
+/// Fonction qui prend en paramètre une couleur pour retourner une couleur clair ou foncé
+/// @group functions
+/// @param {color} $color - couleur de votre background
+/// @param {color} $light [$v_set-color-light] - la couleur clair que la fonction va vous retourner
+/// @param {color} $dark [$v_set-color-dark] - la couleur foncé que la fonction va vous retourner
+/// @param {nbr} $adjust-set-color [$v_adjust-set-color] - en changeant cette valeur vous réajuster à combien le switch entre clair et foncé se fait
+/// @example color: m_set-color(#000);
+@function m_set-color($color, $light: $v_set-color-light, $dark: $v_set-color-dark, $adjust-set-color: $v_adjust-set-color){
+    @if not $color{
+        @return $light;
+    }
+    @if $color{
+        @if(lightness($color) > 50 + $adjust-set-color or $color == transparent){
+            @return $dark;
+        }
+        @else if(lightness($color) <= 50 + $adjust-set-color){
+            @return $light;
+        }
+    }
+
+}
+
+//? Eclairci une couleur (en le mixant avec du blanc)
+//* La weight est en %
+/// Eclairci une couleur (en le mixant avec du blanc)
+/// @group functions
+/// @param {color} $color - couleur à redéfinir
+/// @param {%} $weight - % de blanc à ajouter
+/// @example color: m_tint-color(#363);
+@function m_tint-color($color, $weight) {
+    @return mix(#FFF, $color, $weight);
+}
+
+//? Assombri une couleur (en le mixant avec du noir)
+//* La weight est en %
+/// Assombri une couleur (en le mixant avec du noir)
+/// @group functions
+/// @param {color} $color - couleur à redéfinir
+/// @param {%} $weight - % de noir à ajouter
+/// @example color: m_shade-color(#363);
+@function m_shade-color($color, $weight) {
+    @return mix(#000, $color, $weight);
+}
+
+//? Assombri ou éclairci une couleur selon $weight
+//* Si c'est > 0 alors on assombri
+//* Si c'est < 0 alors on éclairci
+/// Assombri ou éclairci une couleur
+/// @group functions
+/// @param {color} $color - couleur à redéfinir
+/// @param {%} $weight - Si le % est positif on assombri si il est négatif on éclairci
+/// @example color: m_sifht-color(#363);
+@function m_shift-color($color, $weight) {
+    @return if($weight > 0, m_shade-color($color, $weight), m_tint-color($color, -$weight));
+}
+
+//? FUNCTION POUR STRIP UN NOMBRE ET ENLEVER: px, rem, ect...
+/// FUNCTION POUR STRIP UN NOMBRE ET ENLEVER: px, rem, ect...
+/// @group functions
+/// @param {color} $number - Nombre à strip
+/// @example color: m_strip-unit(36rem);
+@function m_strip-unit($number) {
+    @if type-of($number) == 'number' and not unitless($number) {
+      @return math.div($number, ($number * 0 + 1));
+    }
+  
+    @return $number;
+}
+
+//? Converti rem en px
+/// Converti rem en px
+/// @group functions
+/// @param {rem} $value - Valeur en rem
+/// @example width: m_rem-to-px(36rem);
+@function m_rem-to-px($value){
+    $value: m_strip-unit($value) * 10px;
+    @return $value;
+}
+
+//? Remove whitespace on a string
+@function m_str-remove-whitespace($str){
+    @while (str-index($str, ' ') != null) {
+        $index: str-index($str, ' ');
+        $str: "#{str-slice($str, 0, $index - 1)}#{str-slice($str, $index + 1)}";
+    }
+    @return $str;
+}

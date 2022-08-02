@@ -1,0 +1,98 @@
+
+//? Transition
+$v_transition-default-value: .3s!default;
+$v_transition-default: all #{$v_transition-default-value} ease-in-out!default;
+
+//? animation-duration
+$v_anim_time-xs:   .1s !default;
+$v_anim_time-sm:   .2s !default;
+$v_anim_time-md:   .3s !default;
+$v_anim_time-lg:   .5s !default;
+$v_anim_time-xl:   1s !default;
+$v_anim_time-xxl:  2s !default;
+
+//? A utiliser pour des boucles
+$v_anim_time:(
+    time--xs:  $v_anim_time-xs,
+    time--sm:  $v_anim_time-sm,
+    time--md:  $v_anim_time-md,
+    time--lg:  $v_anim_time-lg,
+    time--xl:  $v_anim_time-xl,
+    time--xxl: $v_anim_time-xxl
+)!default;
+
+//? animation-timing-function
+$v_anim_type:(
+    type--ease :          ease,
+    type--ease-in :       ease-in,
+    type--ease-out :      ease-out,
+    type--ease-in-out :   ease-in-out,
+    type--linear :        linear,
+    type--step-start :    step-start,
+    type--step-end :      step-end,
+);
+
+//? animation-direction
+$v_anim_direction:(
+    dir--normal: normal,
+    dir--reverse: reverse,
+    dir--alternate: alternate,
+    dir--alternate-reverse: alternate-reverse,
+);
+
+//? animation-fill-mode
+$v_anim_fill:(
+    fill--none: none,
+    fill--forwards: forwards,
+    fill--backwards: backwards,
+    fill--both: both,
+);
+
+//? animation-delay
+$v_anim_delay-step: .1s !default; // A modifier pour générer tous les autres délay en fonction de celui ci
+$v_anim_delay-xs:   .3s !default;
+$v_anim_delay-sm:   $v_anim_delay-xs + $v_anim_delay-step !default;
+$v_anim_delay-md:   $v_anim_delay-sm + $v_anim_delay-step !default;
+$v_anim_delay-lg:   $v_anim_delay-md + $v_anim_delay-step !default;
+$v_anim_delay-xl:   $v_anim_delay-lg + $v_anim_delay-step !default;
+$v_anim_delay-xxl:  $v_anim_delay-xl + $v_anim_delay-step !default;
+
+//? A utiliser pour des boucles
+$v_anim_delay:(
+    delay--xs:  $v_anim_delay-xs,
+    delay--sm:  $v_anim_delay-sm,
+    delay--md:  $v_anim_delay-md,
+    delay--lg:  $v_anim_delay-lg,
+    delay--xl:  $v_anim_delay-xl,
+    delay--xxl: $v_anim_delay-xxl
+)!default;
+
+//? animation-iteration-count
+$v_anim_count-xs:  1.5!default;
+$v_anim_count-sm:  2!default;
+$v_anim_count-md:  2.5!default;
+$v_anim_count-lg:  3!default;
+$v_anim_count-xl:  3.5!default;
+$v_anim_count-xxl: 4!default;
+
+//? A utiliser pour des boucles
+$v_anim_count:(
+    count--infinite: infinite,
+    count--xs:  $v_anim_count-xs,
+    count--sm:  $v_anim_count-sm,
+    count--md:  $v_anim_count-md,
+    count--lg:  $v_anim_count-lg,
+    count--xl:  $v_anim_count-xl,
+    count--xxl: $v_anim_count-xxl,
+)!default;
+
+//? A utiliser pour des boucles
+//! Boucle compliquée à utiliser
+$v_anim-all:(
+    $v_anim_time: animation-duration,
+    $v_anim_type: animation-timing-function,
+    $v_anim_direction: animation-direction,
+    $v_anim_fill: animation-fill-mode,
+    $v_anim_delay: animation-delay,
+    $v_anim_count: animation-iteration-count,
+);

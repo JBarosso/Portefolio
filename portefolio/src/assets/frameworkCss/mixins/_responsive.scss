@@ -1,0 +1,78 @@
+//? Variables globales
+@use '../variables' as *;
+@use './functions' as *;
+
+
+//? Génération des medias breakpoints
+//* $direction min ou max
+//* Si $value est entré en pixel alors on utilise un media personnalisé
+//* Sinon utiliser xs, sm, md, lg, xl, xxl
+/// Génération des medias breakpoints
+/// @group responsive
+/// @param {string} $direction - La direction de votre media query min ou max
+/// @param {nbr | string} $value - Valeur de votre breakpoint (xs,sm,md,lg,xl,xxl) ou personnalisé 1080 pour 1080px par exemple
+/// @param {string} $type [px] - Est utile quand vous rentrez des variables dans votre mixin qui sont en rem vous modifier le paramètre en "rem" pour que la mixin fasse automatiquement la conversion rem en px
+/// @example @include m_breakpoint(max,md){...}
+@mixin m_breakpoint($direction, $value, $type: px){
+    @if $value == 0{
+        @content;
+    }
+    @else{
+        @if $type == "rem"{
+            $value: m_strip-unit($value);
+            $value: $value * 10;
+        }
+        @if $type "px"{
+            @if map-has-key($v_breakpoints, $value){
+                $breakpoint: map-get($v_breakpoints, $value);
+                @if $direction == max{
+                    $breakpoint: $breakpoint - .02;
+                }
+                @media (#{$direction}-width: #{$breakpoint}px) {
+                    @content;
+                }
+            }
+            @else{
+                $value: $value * 1px;
+                @media (#{$direction}-width: #{$value}) {
+                    @content;
+                }
+            }
+        }
+    }
+}
+
+
+//? Mixins pour media query between
+//* @media (min-width: $min) and (max-width: $max)
+/// Génération des medias breakpoints
+/// @group responsive
+/// @param {nbr | string} $min - Valeur de votre breakpoint min (xs,sm,md,lg,xl,xxl) ou personnalisé 1080 pour 1080px par exemple
+/// @param {nbr | string} $max - Valeur de votre breakpoint max (xs,sm,md,lg,xl,xxl) ou personnalisé 1080 pour 1080px par exemple
+/// @example @include m_breakpoint-between(md,xl){...}
+@mixin m_breakpoint-between($min, $max){
+    @if map-has-key($v_breakpoints, $min){
+        $min: map-get($v_breakpoints, $min);
+    }
+    @if map-has-key($v_breakpoints, $max){
+        $max: map-get($v_breakpoints, $max);
+    }
+    @media (min-width: ($min+px)) and (max-width: ($max+px)) {
+        @content;
+    }
+}
+
+
+//? BEM BREAKPOINT
+@mixin m_breakpoint-class($class) {
+    
+    @each $break, $val in $v_breakpoints-class {
+
+        #{$break}#{$class}{
+
+            @include m_breakpoint(min, $val){
+                @content;
+            }
+        }
+    }
+}

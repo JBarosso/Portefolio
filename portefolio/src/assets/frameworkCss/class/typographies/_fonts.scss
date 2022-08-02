@@ -1,0 +1,52 @@
+@use "../../variables/" as *;
+@use "../../mixins/" as *;
+@use "../../vendors/rfs" as *;
+@use "../var" as *;
+
+.f{
+
+    &z{
+
+        //? Font size pour le texte
+        @each $modifier, $val in $v_font-sizes-texte {
+            
+            &--#{$modifier}{
+                @include rfs_font-size($val);
+            }
+        }
+    
+        //? Font size pour les titres
+        @each $titre, $sizes in $v_font-sizes-titres {
+            
+            &-h#{$titre}{
+    
+                @each $modifier, $val in $sizes {
+    
+                    &--#{$modifier}{
+                        @include rfs_font-size($val);
+                    }
+                }
+            }
+        }
+    }
+
+    //? Font weight
+    &w{
+        @for $i from 1 to 10 {
+            
+            &--#{$i}00{
+                font-weight: #{$i}00;
+            }
+        }
+    }
+
+    &s{
+
+        @each $property in $class_font-styles {
+            
+            &--#{$property}{
+                font-style: $property;
+            }
+        }
+    }
+}

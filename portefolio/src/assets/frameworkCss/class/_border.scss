@@ -1,0 +1,49 @@
+@use "../variables/" as *;
+@use "../mixins/" as *;
+@use "./var" as *;
+
+@include m_breakpoint-class('border'){
+
+    //? Style
+    @each $property in $class_border-style {
+        &-#{$property}{
+            border-style: $property;
+        }
+    }
+
+    //? Color
+    @each $class, $color in $v_colors{
+        &-#{$class}{
+            border-color: $color;
+        }
+    }
+
+    //? Width
+    @each $modifier, $val in $class_border-widths {
+        
+        &--#{$modifier}{
+            border-width: $val;
+        }
+
+        @each $direction, $dir-1, $dir-2 in $class_direction-all {
+
+            &-#{$direction}--#{$modifier}{
+                border-#{$dir-1}-width: $val;
+
+                @if $dir-2{
+                    border-#{$dir-2}-width: $val;
+                }
+            }
+        }
+    }
+}
+
+//? Radius
+@include m_breakpoint-class('rounded'){
+
+    @each $modifier, $val in $v_border-radius {
+        &--#{$modifier}{
+            border-radius: $val;
+        }
+    }
+}

@@ -1,0 +1,31 @@
+@use "../variables" as *;
+@use "../mixins" as *;
+
+/// Skin votre/vos élément(s) en tag
+/// @group components
+/// @param {template} $template [1] - Choix du template
+/// @param {declinaison} $declinaison [1] - Déclinaison du template
+/// @param {color} $color-1 [$v_color-primary] - 1er couleur
+/// @param {color} $color-2 [$v_color-secondary] - 2em couleur
+/// @param {nbr} $adjust-set-color [$v_adjust-set-color] - Ajuste le m_set-color()
+/// @example  @include comp_tag();
+@mixin comp_tag($template: 1, $declinaison: 1, $color-1: $v_color-primary, $color-2: $v_color-secondary, $adjust-set-color: $v_adjust-set-color){
+
+    @if $template == 1{
+
+        @if $declinaison == 1{
+            padding: 0.5rem 1rem;
+            font-size: 1.2rem;
+            color: m_set-color($color-1, $adjust-set-color: $adjust-set-color);
+            background-color: $color-1;
+            border: .1rem solid $color-1;
+            position: relative;
+            width: fit-content;
+            display: inline-block;
+        
+            @if $v_enable-radius{
+                border-radius: 5rem;
+            }
+        }
+    }
+}

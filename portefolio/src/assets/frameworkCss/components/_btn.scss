@@ -1,0 +1,56 @@
+//? VARIABLES GLOBALES
+@use '../variables' as *;
+
+//? Utiliser functions
+@use '../mixins/functions' as *;
+
+
+//? Mixin pour bouton CLASSIC
+//? Si votre bouton qui appelle btn-standard possede la classe picto__before--envelope par exemple, le margin sera mis automatiquement
+/// Crée un bouton standard avec juste padding couleur border
+/// @group components
+/// @param {color} $color [$v_color-primary] - couleur du bouton
+/// @param {declinaison} $declinaison [$v_button-type] - Si on veut qu'il soit rempli "fill" ou juste border "outline"
+/// @example  @include comp_btn-standard(#363);
+@mixin comp_btn-standard(
+    $color: $v_color-primary,
+    $declinaison: $v_button-type,
+    $adjust-set-color: $v_adjust-set-color,
+){
+    display: $v_button-display;
+    padding: $v_button-padding;
+    text-decoration: none;
+    outline: none;
+    transition: $v_button-transition;
+    border-width: .1rem;
+    border-style: solid;
+    border-color: $color;
+    line-height: 1;
+
+    @if $v_enable-radius {
+        border-radius: $v_button-radius;
+    }
+    @if not $v_enable-radius {
+        border-radius: 0;
+    }
+    @if $declinaison == fill{
+        color: m_set-color($color, $adjust-set-color: $adjust-set-color);
+        background-color: $color;
+        &:hover,
+        &:focus{
+            color: $color;
+            background-color: transparent;
+            border-color: $color;
+        }
+    }
+    @else if $declinaison == outline{
+        color: $color;
+        background-color: transparent;
+        &:hover,
+        &:focus{
+            color: m_set-color($color, $adjust-set-color: $adjust-set-color);
+            background-color: $color;
+            border-color: $color;
+        }
+    }
+}

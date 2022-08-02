@@ -1,0 +1,19 @@
+@use "../variables/" as *;
+@use "../mixins/" as *;
+@use "./var" as *;
+
+@each $class, $color in $v_colors{
+
+    .bg-#{$class}{
+        background-color: $color;
+        color: m_set-color($color);
+
+        @each $modifier, $opacity in $class_color-variants {
+            
+            &--#{$modifier}{
+                background-color: transparentize($color, $opacity);
+                color: m_set-color(m_tint-color($color, ($opacity * 100%)));
+            }
+        }
+    }
+}

@@ -1,0 +1,40 @@
+//? GRAYSCALE
+$v_filter_grayscale-xs: .1!default;
+$v_filter_grayscale-sm: .3!default;
+$v_filter_grayscale-md: .5!default;
+$v_filter_grayscale-lg: .65!default;
+$v_filter_grayscale-xl: .8!default;
+$v_filter_grayscale-xxl: 1!default;
+
+$v_filter-grayscale:(
+    'none': 0,
+    xs: $v_filter_grayscale-xs,
+    sm: $v_filter_grayscale-sm,
+    md: $v_filter_grayscale-md,
+    lg: $v_filter_grayscale-lg,
+    xl: $v_filter_grayscale-xl,
+    xxl: $v_filter_grayscale-xxl
+)!default;
+
+//? brightness
+$v_filter_brightness-xs: 0!default;
+$v_filter_brightness-sm: .5!default;
+$v_filter_brightness-md: .75!default;
+$v_filter_brightness-lg: 1!default;
+$v_filter_brightness-xl: 1.5!default;
+$v_filter_brightness-xxl: 2!default;
+
+$v_filter-brightness:(
+    'none': 0,
+    xs: $v_filter_brightness-xs,
+    sm: $v_filter_brightness-sm,
+    md: $v_filter_brightness-md,
+    lg: $v_filter_brightness-lg,
+    xl: $v_filter_brightness-xl,
+    xxl: $v_filter_brightness-xxl
+)!default;
+
+$v_filters:(
+    'grayscale': $v_filter-grayscale,
+    'brightness': $v_filter-brightness,
+);

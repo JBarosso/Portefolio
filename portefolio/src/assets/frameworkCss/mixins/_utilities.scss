@@ -1,0 +1,289 @@
+//? VARIABLES GLOBALES
+@use '../variables' as *;
+@use './layouts' as *;
+
+//? Utiliser les functions
+@use './functions' as *;
+@use '../vendors/rfs' as *;
+
+
+//? Créer des puces pour des listes de <ul>
+//* En 1er paramètre cible si on souhaite la puce sur le <li> ou le <a>
+//* En 2em paramètre la position top de la puce (si jamais mal calé)
+//* Left calculé par rapport au padding du <ul>
+//* Si vous voulez changer des variables de la $list-var vous devez les changer
+//* avec @use "variables" with {} 
+//! Attention cette mixin est utilisé dans les reset pour créer le skin des <ul> de .richtext
+/// Génère une skin de list <ul>
+/// @group utilities
+/// @param {string} $list-cible [li] - Cible le <li> ou le <a> dans le <li>
+/// @param {rem} $$list-puce-top [$v_list-puce-top] - Position top de votre puce
+/// @param {rem} $$list-puce-left [calc(-#{$v_list-padding-value} + 0.1rem)] - Position left absolute de votre puce
+/// @example @include m_list-ul();
+@mixin m_list-ul(
+    $list-cible: li,
+    $list-puce-top: $v_list-puce-top,
+    $list-puce-left: calc(-#{$v_list-padding-value} + 0.1rem),
+    $v_list-var...
+){
+    %puce{
+        content: '';
+        @include m_box($v_list-puce-size);
+        background-color: $v_list-puce-color;
+        position: absolute;
+        left: $list-puce-left;
+        top: $list-puce-top;
+        @if $v_enable-radius == true{
+            border-radius: $v_list-puce-radius;
+        }
+    }
+    ul{
+        list-style: none;
+        padding: $v_list-ul;
+        li{
+            position: relative;
+            padding: $v_list-li;
+            @if $list-cible == li{
+                &::before{
+                    @extend %puce;
+                }
+            }
+            @else{
+                a::before{
+                    @extend %puce;
+                }
+            }
+
+            ul li::before{
+                border: .1rem solid $v_list-puce-color;
+                background: none;
+            }
+        }
+    }
+}
+
+//? Mixins Tables
+//* $color définit la couleur de fond du table header
+//* $margin définit si le tableau est centré en margin auto ou pas
+//* $min-width définit la largeur minimum d'une cellule
+/// Mixins génère un skin de <table>
+/// @group utilities
+/// @param {color} $color [$v_color-primary] - couleur de votre tableau
+/// @example @include m_table();
+@mixin m_table($color:$v_color-primary){
+    border-collapse: collapse;
+    margin: auto;
+    max-width: fit-content;
+    display: block;
+    overflow-x: scroll;
+
+    @if $v_enable-radius{
+        border-radius: 0.8rem;
+    }
+
+    td{
+        border: .1rem solid #ddd;
+        padding: .8rem;
+      }
+    tr:nth-child(even){
+          background-color: #f2f2f2;
+    }
+  
+    tr:hover {
+        background-color: transparentize($color, .5);
+    }
+    
+    thead {
+        padding: 12px;
+        text-align: left;
+        background-color: $color;
+        color: m_set-color($color);
+
+        td{
+            white-space: nowrap;
+        }
+    }
+}
+
+//? Mixins générateur de triangle 
+/// Mixins génère un triangle en css
+/// @group utilities
+/// @param {rem} $width [1rem] - Taille du triangle
+/// @param {color} $background [$v_color-primary] - couleur de trangle
+/// @param {string} $direction [top] - direction vers la quel se tourne le triangle
+/// @param {rem} $radius [.4rem] - border-radius du triangle
+/// @example @include m_triangle();
+@mixin m_triangle($width:1rem,$background:$v_color-primary, $direction:top, $radius:.4rem ){
+    width: $width;
+    height: $width;
+    background:$background;
+    @if $direction == "top"{
+        clip-path:polygon(0% 100%, 50% 0%, 100% 100%);
+    }
+    @if $direction == "right"{
+        clip-path:polygon(0% 0%, 100% 50%, 0% 100%)
+    }
+    @if $direction == "bottom"{
+        clip-path:polygon(0% 0%, 50% 100%, 100% 0%)
+    }
+    @if $direction == "left"{
+        clip-path:polygon(100% 0%, 0% 50%, 100% 100%)
+    }
+    @if $v_enable-radius{
+        border-radius: $radius;
+    }
+}
+
+//? Mixin pour généré du html sur des titres
+/// Génère du css pour les titres du site
+/// @group utilities
+/// @param {nbr} $start [1] - Titre de départ
+/// @param {nbr} $end [6] - Titre de fin
+/// @example  @include m_titres(2,6){ ... } Ici on va du h2 au h6
+@mixin m_titres($start: 1, $end: 6){
+    @for $i from $start to $end {
+        h#{$i}{
+            @content;
+        }
+    }
+}
+
+//? Mixin Dégradé simple
+/// Mixin Dégradé simple
+/// @group utilities
+/// @param {color} $color1 [$v_color-primary] - Couleur 1
+/// @param {color} $color2 [$v_color-secondary] - Couleur 2
+/// @param {deg} $direction [0deg] - Rotation du background
+/// @param {string} $type [linear] - Type de gradiant
+/// @example  @include m_gradient(#363, #565, 45deg);
+@mixin m_gradient($color1:$v_color-primary, $color2:$v_color-secondary, $direction: 0deg, $type:linear){
+
+    @if $type == linear{
+        background: linear-gradient($direction, $color1, $color2);
+    }
+
+    @if $type == radial{
+        background: radial-gradient($color1, $color2);
+    }
+}
+
+//? Création de border
+/// Création de border, pratique quand on souhaite avoir tout les borders ou juste certain
+/// @group utilities
+/// @param {rem} $border-width [.1rem] - Taille du border
+/// @param {color} $border-color [$v_color-primary] - Couleur du border
+/// @param {list} $direction - top,right,bottom,left ou tous si rien renseigné
+/// @example  @include m_border(.1rem, #363, top, bottom);
+@mixin m_border($border-width: .1rem, $border-color: $v_color-primary, $direction...){
+    border-color: $border-color;
+    border-style: solid;
+
+    @if $direction{
+        @each $dir in $direction {
+            border-#{$dir}-width: $border-width;
+        }
+    }
+    @if length($direction) == 0{
+        border-width: $border-width;
+    }
+}
+
+
+//? Mixin pour animation background
+/// Mixin pour animation background de gauche à droite ou inversement
+/// @group utilities
+/// @param {color} $initial - background initial
+/// @param {color} $hover - background hover
+/// @param {bool} $inverted [false] - change la direction du hover
+/// @example  @include m_bg-skew();
+@mixin m_bg-skew($initial, $hover, $inverted: false) {
+    background: linear-gradient(
+      90deg,
+      $hover 0%,
+      $hover 50%,
+      $initial 50%,
+      $initial 100%
+    );
+    background-repeat: no-repeat;
+    background-size: 200% 100%;
+    color: m_set-color($initial);
+  
+    background-position: right bottom;
+    @if $inverted {
+      background-position: left bottom;
+    }
+    transition: background-position 0.25s ease-out;
+  
+    &:focus,
+    &:hover {
+        color: m_set-color($hover);
+        background-position: left bottom;
+        @if $inverted {
+            background-position: right bottom;
+        }
+    }
+}
+
+//? Mixin to customize scrollbars
+/// Beware, this does not work in all browsers
+/// @group utilities
+/// @param {Length} $size - Horizontal scrollbar's height and vertical scrollbar's width
+/// @param {Color} $foreground-color - Scrollbar's color
+/// @param {Color} $background-color [mix($foreground-color, white, 50%)] - Scrollbar's color
+/// @example @include m_scrollbars($size, $foreground-color: $v_color-primary)
+/// @include scrollbars(.5em, slategray);
+@mixin m_scrollbars($size, $foreground-color: $v_color-primary) {
+    // For Google Chrome
+    &::-webkit-scrollbar {
+        width:  $size;
+        height: $size;
+    }
+  
+    &::-webkit-scrollbar-thumb {
+        background: transparentize($foreground-color, .8);
+
+        &:hover{
+            background: transparentize($foreground-color, .6);
+        }
+
+        &:active{
+            background: transparentize($foreground-color, .5);
+        }
+    }
+  
+    &::-webkit-scrollbar-track {
+        border-radius: 10px;
+        background: transparentize($foreground-color, .95);
+    }
+}
+
+/// Mixin pour créer un cercle 
+/// @group utilities
+/// @param {rem} $size - taille du cercle
+/// @param {rem} $radius [1000rem] - radius du cercle
+/// @example  @include m_circle();
+@mixin m_circle($size, $radius:1000rem){
+    @include m_box($size);
+    border-radius: $radius;
+}
+
+/// Mixin pour créer une iframe responsive \
+/// Elle met le parent en relative avec une padding en % \
+/// Puis l'iframe en absolute \
+/// Il n'y a pas besoin de paramètre
+/// @group utilities
+/// @example @include m_iframe-responsive();
+@mixin m_iframe-responsive(){
+    position: relative;
+    padding-bottom: 56.25%; /*16:9*/
+    height: 0;
+    overflow: hidden;
+
+    iframe{
+        position: absolute;
+        top:0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+    }
+}

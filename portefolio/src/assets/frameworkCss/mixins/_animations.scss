@@ -1,0 +1,48 @@
+//? VARIABLS GLOBAL
+@use '../variables' as *;
+
+
+//! NE MARCHE PAS A REVOIR CAR ON A UN "," EN TROP
+//? Mixins Animations 
+@mixin m_animations($time:$v_anim_time-md, $type:linear, $delay: $v_anim_delay-xs, $list...){
+    
+    $anim-css: ();
+
+    @each $param in $list {
+        $anim-css : append($anim-css, '#{$time} #{$delay} #{$type} #{$param}');
+    }
+
+    animation: #{$anim-css};
+}
+
+
+/// Cette mixin permet de créer un effet d'apparition progressif des éléments enfants sur lesquels elle est appelée.
+/// Il faut combiner cette mixin avec un type animation (appelée en BEM ou une autre mixin)
+/// Pour cibler tous les enfants ils faudra donc l'appeler sous la forme .parent >* {}
+/// @group animations
+/// @param {nbr} $start [0] - une variable temporelle qui définit au bout de combien de temps la première animation se lance
+/// @param {nbr} $step [.1] - autre variable temporelle qui définit le pas, l'incrémentation temporelle entre chaque animation
+/// @param {nbr} $end [10] -Le nombre d'éléments enfants, défini au bout de combien d'itérations on sort de la boucle
+/// @param {string} $type [child] - Si on souhaite cibler les child ou of-type
+/// @example 
+/// .parent > * { 
+///    @include m_anim-delays(0,.3,10,"of-type");
+/// }
+@mixin m_anim-delays($start:0, $step: .1, $end: 10, $type:'child'){
+    $count: 2;
+    $step-save: $step;
+    $step: $start+$step;
+
+    &:nth-#{$type}(1){
+        animation-delay:  #{$start}s;
+    }
+
+    @while $count < $end + 1 {
+        &:nth-#{$type}(#{$count}){
+            animation-delay:  #{$step}s;
+         }
+
+        $step: $step + $step-save;
+        $count: $count+1;
+    }
+}

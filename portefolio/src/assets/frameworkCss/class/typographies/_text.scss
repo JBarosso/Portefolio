@@ -1,0 +1,25 @@
+@use "../../variables/" as *;
+@use "../../mixins/" as *;
+@use "../var" as *;
+
+//? Text
+@include m_breakpoint-class(t){
+
+    @each $class, $propety, $properties in $class_text-properties {
+        
+        &#{$class}{
+            
+            @each $prop-1, $prop-2 in $properties {
+
+                &--#{$prop-1}{
+
+                    @if $class != 'c'{
+                        text-#{$propety}: $prop-1;
+                    } @else{
+                        color: $prop-2;
+                    }
+                }
+            }
+        }
+    }
+}

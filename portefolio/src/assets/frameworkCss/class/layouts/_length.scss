@@ -1,0 +1,44 @@
+@use "../../variables" as *;
+@use "../../mixins" as *;
+
+.w--full{
+    width: 100%;
+}
+
+.h--full{
+    height: 100%;
+}
+
+.w-screen--full{
+    width: 100vw;
+}
+
+.h-screen--full{
+    height: 100vh;
+}
+
+//? Max-width
+@include m_breakpoint-class('mw'){
+
+    @each $modifier, $val in $v_max-width-val {
+        
+        &--#{$modifier}{
+            max-width: $val;
+        }
+    }
+
+    &--full{
+        max-width: 100%;
+    }
+}
+
+//? Aspect Ratio
+.aspect-auto{
+    aspect-ratio: auto;
+}	
+.aspect-square{
+    aspect-ratio: 1 / 1;
+}	
+.aspect-video{
+    aspect-ratio: 16 / 9;
+}	

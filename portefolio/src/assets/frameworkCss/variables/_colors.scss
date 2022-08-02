@@ -1,0 +1,63 @@
+@use "sass:math";
+
+//? Color
+$v_color-primary:     rgba(13, 110, 253, 1)!default;
+$v_color-secondary:   rgba(102, 16, 242, 1)!default;
+$v_color-tertiary:    rgba(108, 117, 125, 1)!default;
+
+$v_color-body:        rgba(5, 5, 5, 1)!default;
+
+$v_color-success:     rgba(25, 135, 84, 1)!default;
+$v_color-info:        rgba(13, 202, 240, 1)!default;
+$v_color-warning:     rgba(255, 193, 7, 1)!default;
+$v_color-danger:      rgba(220, 53, 69, 1)!default;
+
+$v_color-light:       rgba(248, 249, 250, 1)!default;
+$v_color-dark:        rgba(5, 5, 5, 1)!default;
+$v_color-black:         rgba(0,0,0,1)!default;
+$v_color-white:             rgba(255,255,255,1)!default;
+
+$v_color-facebook:    rgba(73, 108, 174, 1)!default;
+$v_color-twitter:     rgba(39, 184, 229, 1)!default;
+$v_color-linkedin:    rgba(0, 142, 195, 1)!default;
+$v_color-youtube:     rgba(230, 33, 23, 1)!default;
+$v_color-instagram-bg:   linear-gradient(to right,  #ed0017 0%,#c0009d 100%)!default;
+$v_color-instagram-txt: #ed0017!default;
+
+$v_set-color-dark: rgba(5, 5, 5, 1)!default;
+$v_set-color-light: rgba(255, 255, 255, 1)!default;
+
+$v_colors:(
+    'primary':               $v_color-primary,
+    'secondary':             $v_color-secondary,
+    'tertiary':              $v_color-tertiary,
+    'dark':                  $v_color-dark,
+    'light':                 $v_color-light,
+)!default;
+
+//? A utiliser dans des boucles each pour générer des hovers ou autre (version texte)
+$v_rs-colors-txt:(
+    facebook: $v_color-facebook,
+    twitter: $v_color-twitter,
+    linkedin: $v_color-linkedin,
+    youtube: $v_color-youtube,
+    instagram: $v_color-instagram-txt,
+)!default;  
+
+//? Tableau associatif permettant d'associer un picto font awesome au href
+$v_rs-href-colors:(
+    'facebook' 'facebook-f' $v_color-facebook $v_color-facebook,
+    'twitter' 'twitter' $v_color-twitter $v_color-twitter,
+    'linkedin' 'linkedin-in' $v_color-linkedin $v_color-linkedin,
+    'youtube' 'youtube' $v_color-youtube $v_color-youtube,
+    'instagram' 'instagram' $v_color-instagram-txt $v_color-instagram-bg,
+)!default;
+
+//? Version pour background
+$v_rs-colors-bg:(
+    facebook: $v_color-facebook,
+    twitter: $v_color-twitter,
+    linkedin: $v_color-linkedin,
+    youtube: $v_color-youtube,
+    instagram: $v_color-instagram-bg,
+)!default;

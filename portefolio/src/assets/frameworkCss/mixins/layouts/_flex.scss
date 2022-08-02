@@ -1,0 +1,83 @@
+//? Mixin flex
+/// Display: flex;
+/// @group flex
+/// @example @include m_flex(row,wrap,space-between,center);
+@mixin m_flex($direction: row, $wrap: wrap, $justify-content: flex-start, $align-items: flex-start){
+    display: flex;
+    flex-direction: $direction;
+    flex-wrap: $wrap;
+    justify-content: $justify-content;
+    align-items: $align-items;
+}
+
+/// Display: inline-flex;
+/// @group flex
+/// @example @include m_inline-flex(row,wrap,space-between,center);
+@mixin m_inline-flex($direction: row, $wrap: wrap, $justify-content: flex-start, $align-items: flex-start){
+    display: inline-flex;
+    flex-direction: $direction;
+    flex-wrap: $wrap;
+    justify-content: $justify-content;
+    align-items: $align-items;
+}
+
+//? MIXIN POUR CENTRER UN ELEMENT
+//* Rentrer X ou Y en majuscule pour changer l'orientation
+//* Par defaut on centre en X et Y
+/// Centrer un élément en self avec flex
+/// @group flex
+/// @param {dir} $direction [false] - X ou Y par défault les 2 directions
+/// @example @include m_flex-self-center(X);
+@mixin m_flex-self-center($direction: false){
+    @if not $direction{
+        justify-self: center;
+        align-self: center;
+    }
+    @else if $direction == X{
+        justify-self: center;
+    }
+    @else if $direction == Y{
+        align-self: center;
+    } 
+}
+
+
+//? MIXIN POUR CENTRER UN ELEMENT
+//* Rentrer X ou Y en majuscule pour changer l'orientation
+//* Par defaut on centre en X et Y
+/// Centrer un élément avec flex
+/// @group flex
+/// @param {dir} $direction [false] - X ou Y par défault les 2 directions
+/// @example @include m_flex-center(X);
+@mixin m_flex-center($direction: false){
+    display: flex;
+    flex-flow: row wrap;
+    @if not $direction{
+        justify-content: center;
+        align-items: center;
+    }
+    @else if $direction == X{
+        justify-content: center;
+    }
+    @else if $direction == Y{
+        align-items: center;
+    } 
+}
+
+//? Flex order
+/// Mixin qui permet de setup un order pour chaque élément
+/// @group flex
+/// @param {nbr} $step [1] - De combien est séparé chaque élément
+/// @param {nbr} $start [1] - A quel order on le 1er élément démarre
+/// @param {list} $list - Liste des éléments dans l'ordre
+/// @example @include m_flex-order(1,1,'.toto','.tutu','.tata');
+@mixin m_flex-order($step: 1, $start: 1, $list...){
+    $count-1: $start;
+    @each $elem in $list {
+        #{$elem}{
+            order: #{$count-1};
+        }
+
+        $count-1: $count-1 + $step;
+    }
+}

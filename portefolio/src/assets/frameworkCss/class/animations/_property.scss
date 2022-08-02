@@ -1,0 +1,14 @@
+//? Variables global
+@use '../../variables' as *;
+
+//? Variables bem
+@use '../var' as *;
+
+@each $classe, $css in $v_anim-all {
+
+    @each $modifier, $val in $classe {
+        .anim__#{$modifier}{
+            #{$css}: $val;
+        }
+    }
+}

@@ -1,0 +1,21 @@
+@use '../variables' as *;
+
+//? Mixin picto Fontawesome
+/// Mixin pour appeler un picto
+/// @group pictos
+/// @param {string} $content - nom du picto
+/// @example @include m_picto('house');
+@mixin m_picto($content){
+    @if map-has-key($v_picto-brands, $content) {
+        $picto: map-get($v_picto-brands, $content);
+        font-family: "Font Awesome 5 Brands";
+        font-weight: normal;
+        content: '#{$picto}';
+    }@else{
+        $picto: map-get($v_pictos, $content);
+        font-family: "Font Awesome 5 Free";
+        font-weight: 900;
+        content: '#{$picto}';
+    }
+    display: inline-block;
+}

@@ -1,0 +1,39 @@
+@use "../variables/" as *;
+@use "../mixins/" as *;
+@use "./var" as *;
+
+//? Picto font awesome
+
+//* Picto BRAND
+@each $name, $val in $v_picto-brands {
+    
+    .picto{
+
+        @each $elem in $v_pseudo-elems {
+            
+            &__#{$elem}{
+
+                &--#{$name}::#{$elem}{
+                    @include m_picto($name);
+                }
+            }
+        }
+    }
+}
+
+//* Picto Classic
+@each $name, $val in $v_pictos {
+    
+    .picto{
+
+        @each $elem in $v_pseudo-elems {
+            
+            &__#{$elem}{
+
+                &--#{$name}::#{$elem}{
+                    @include m_picto($name);
+                }
+            }
+        }
+    }
+}

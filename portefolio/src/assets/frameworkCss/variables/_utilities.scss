@@ -1,0 +1,143 @@
+@use "sass:math";
+@use './breakpoint' as *;
+@use './colors' as *;
+
+//? Z-INDEX
+$v_z-index-xs:                1 !default;
+$v_z-index-sm:                10 !default;
+$v_z-index-md:                50 !default;
+$v_z-index-lg:                100 !default;
+$v_z-index-xl:                500 !default;
+$v_z-index-xxl:               1000 !default;
+
+$v_z-index-dropdown:          1050 !default;
+$v_z-index-fixed:             1100 !default;
+$v_z-index-popup:             1150 !default;
+$v_z-index-tooltip:           1200 !default;
+
+// A utiliser pour des boucles
+$v_z-index:(
+    xs:             $v_z-index-xs,
+    sm:             $v_z-index-sm,
+    md:             $v_z-index-md,
+    lg:             $v_z-index-lg,
+    xl:             $v_z-index-xl,
+    xxl:            $v_z-index-xxl,
+    dropdown:       $v_z-index-dropdown,
+    fixed:          $v_z-index-fixed,
+    popup:          $v_z-index-popup,
+    tooltip:        $v_z-index-tooltip
+)!default;
+
+
+//? Padding
+$v_padding-xs:    .4rem !default;
+$v_padding-sm:    .8rem !default;
+$v_padding-md:    1.2rem !default;
+$v_padding-lg:    1.6rem !default;
+$v_padding-xl:    3rem !default;
+$v_padding-2xl:   5rem !default;
+$v_padding-3xl:   10rem !default;
+$v_padding-4xl:   16rem !default;
+
+// A utiliser pour des boucles
+$v_paddings:(
+    xs:  $v_padding-xs,
+    sm:  $v_padding-sm,
+    md:  $v_padding-md,
+    lg:  $v_padding-lg,
+    xl:  $v_padding-xl,
+    2xl: $v_padding-2xl,
+    3xl: $v_padding-3xl,
+    4xl: $v_padding-4xl,
+)!default;
+
+//? Margin
+$v_margin-xs:    .4rem !default;
+$v_margin-sm:    .8rem !default;
+$v_margin-md:    1.2rem !default;
+$v_margin-lg:    1.6rem !default;
+$v_margin-xl:    3rem !default;
+$v_margin-2xl:   5rem !default;
+$v_margin-3xl:   10rem !default;
+$v_margin-4xl:   16rem !default;
+
+// A utiliser pour des boucles
+$v_margins:(
+    xs:  $v_margin-xs,
+    sm:  $v_margin-sm,
+    md:  $v_margin-md,
+    lg:  $v_margin-lg,
+    xl:  $v_margin-xl,
+    2xl: $v_margin-2xl,
+    3xl: $v_margin-3xl,
+    4xl: $v_margin-4xl,
+)!default;
+
+// Extend pour reset les margin padding
+%reset-margin-padding{
+    margin: 0;
+    padding: 0;
+}
+
+
+//? Links
+$v_link-color: $v_color-primary!default;
+$v_link-decoration: none!default;
+
+//? Visible & Hidden
+$v_display-xs:  $v_breakpoint-xs - 1!default;
+$v_display-sm:  $v_breakpoint-sm - 1!default;
+$v_display-md:  $v_breakpoint-md - 1!default;
+$v_display-lg:  $v_breakpoint-lg - 1!default;
+$v_display-xl:  $v_breakpoint-xl - 1!default;
+$v_display-xxl: $v_breakpoint-xxl - 1!default;
+
+// A utiliser pour des boucles
+$v_displays:(
+    xs:  $v_display-xs,
+    sm:  $v_display-sm,
+    md:  $v_display-md,
+    lg:  $v_display-lg,
+    xl:  $v_display-xl,
+    xxl: $v_display-xxl,
+)!default;
+
+//? MODELE
+$v_template: template !default;
+
+// Extend pour reset les paramètre du <ul>
+%v_ul-noSkin{
+    padding: 0;
+    margin: 0;
+    list-style: none;
+};
+
+//? Autres
+// Extend pour avoir un element en full
+%v_cover{
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+};
+
+
+//? Element utiliser pour mixin
+
+// Pseudo élément
+$v_pseudo-elems:(
+    before,
+    after
+);
+
+//? Collection pour faire des boucles sur primary secondary tertiary
+$v_types:(
+    'primary',
+    'secondary',
+    'tertiary',
+)!default;
+
+//? Variable d'ajustement de la fonction set-color pour éviter le noir sur une couleur claire
+$v_adjust-set-color: 0!default;
