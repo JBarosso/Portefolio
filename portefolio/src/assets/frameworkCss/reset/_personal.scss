@@ -2,7 +2,6 @@
 @use '../mixins' as *;
 @use '../vendors/rfs' as *;
 
-
 a,
 a:hover,
 a:focus{
@@ -11,7 +10,13 @@ a:focus{
 }
 
 a{
+    color: $v_color-secondary;
     transition: $v_transition-default;
+
+    &:hover,
+    &:focus{
+      color: $v_color-primary;
+    }
 }
 
 html{
@@ -41,7 +46,7 @@ table{
 
 //? Génération des font-size pour les titres
 @each $titre, $value in $v_font-sizes{
-    
+
     h#{$titre}{
         @include rfs_font-size($value);
     }
