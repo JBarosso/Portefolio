@@ -8,6 +8,9 @@
   $v_font-family-titre: "Monument",
 );
 
+//? VARIABLES
+$transition-1: cubic-bezier(0.62,0.05,0.01,0.99);
+
 //! IMPORT FONTS
 
 //* Monument
@@ -92,6 +95,11 @@ body{
 
   &__job{
     @include rfs_font-size(1.8rem);
+    transition: all .3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+
+    &.scrollOk{
+      transform: translateY(-10rem);
+    }
   }
 
   &__infos{
@@ -274,7 +282,50 @@ body.menu-open{
 
 //* pageContent
 .pageContent{
+  display: grid;
+  grid-gap: 10rem;
 
+  @include m_breakpoint(max,md){
+    grid-gap: 5rem;
+  }
+
+  section{
+
+    @include m_breakpoint(min, md){
+      min-height: calc(100vh - 17rem);
+      display: grid;
+      align-items: center;
+    }
+  }
 }
+
+//* INTRO
+.intro{
+
+  h1{
+    @include rfs_font-size(9rem);
+    font-weight: 400;
+    line-height: 1.2;
+    margin: 0;
+    text-transform: uppercase;
+
+    @include m_breakpoint(max, sm){
+      font-size: 3.2rem;
+    }
+  }
+
+  &__img{
+    @include rfs_margin-top(5rem);
+
+    img{
+      width: clamp(30rem, 50%, 70rem);
+      height: 30rem;
+      object-fit: cover;
+    }
+  }
+}
+
+//* ANIMATION
+
 
 //? ADD

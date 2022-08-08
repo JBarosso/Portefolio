@@ -17,6 +17,9 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
+            "allowedCommonJsDependencies": [
+              "aos"
+            ],
             "outputPath": "dist/portefolio",
             "index": "src/index.html",
             "main": "src/main.ts",
@@ -28,9 +31,13 @@
               "src/assets"
             ],
             "styles": [
+              "node_modules/aos/dist/aos.css",
               "src/styles.scss"
             ],
-            "scripts": []
+            "scripts": [
+              "node_modules/aos/dist/aos.js",
+              "src/assets/js/index.js"
+            ]
           },
           "configurations": {
             "production": {
@@ -98,7 +105,9 @@
             "styles": [
               "src/styles.scss"
             ],
-            "scripts": []
+            "scripts": [
+              "src/assets/js/index.js"
+            ]
           }
         }
       }

@@ -1,4 +1,4 @@
-<div class="container header__container">
+<div class="container header__container" @translateDown>
   <div class="logo">
     <a href="#">
       Jordan<br/>
@@ -7,7 +7,7 @@
   </div>
 
   <div class="header__infos">
-    <div class="header__job">
+    <div class="header__job" [class.scrollOk]="window_scroll">
       Front-end developer
     </div>
   </div>
