@@ -15,13 +15,13 @@ export const PROJECT: Project[] = [
   },
   {
     id: 3,
-    title: "Azko",
+    title: "AZKO",
     img: "assets/imgs/project/azko.png",
     tags: ["Intégration", "SASS", "BEM", "JS", "JQUERY", "Responsive"],
   },
   {
     id: 4,
-    title: "Genapi",
+    title: "GENAPI",
     img: "assets/imgs/project/genapi.png",
     tags: ["Intégration", "SASS", "BEM", "JS", "JQUERY", "Responsive"],
   },

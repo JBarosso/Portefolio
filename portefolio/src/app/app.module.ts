@@ -9,6 +9,8 @@ import { NavComponent } from './components/nav/nav.component';
 import { ContactListComponent } from './components/contact-list/contact-list.component';
 import { HeaderComponent } from './components/header/header.component';
 import { FooterComponent } from './components/footer/footer.component';
+import { SlickCarouselModule } from 'ngx-slick-carousel';
+import { ProjectListCarouselComponent } from './components/project-list-carousel/project-list-carousel.component';
 
 @NgModule({
   declarations: [
@@ -18,11 +20,13 @@ import { FooterComponent } from './components/footer/footer.component';
     ContactListComponent,
     HeaderComponent,
     FooterComponent,
+    ProjectListCarouselComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    SlickCarouselModule
   ],
   providers: [],
   bootstrap: [AppComponent]
