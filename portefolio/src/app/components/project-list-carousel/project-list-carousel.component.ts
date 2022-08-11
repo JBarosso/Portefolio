@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit, QueryList, ViewChildren } from '@angular/core';
 import { Project } from 'src/app/utilities/project';
 import { PROJECT } from 'src/app/utilities/project-list';
 
@@ -9,6 +9,8 @@ import { PROJECT } from 'src/app/utilities/project-list';
 })
 export class ProjectListCarouselComponent implements OnInit {
   projectList: Project[] = PROJECT;
+
+  @ViewChildren('projectItem') projectItems:QueryList<ElementRef>;
 
   //* SLICK CAROUSEL
   slideConfig = {
@@ -56,5 +58,4 @@ export class ProjectListCarouselComponent implements OnInit {
 
   ngOnInit(): void {
   }
-
 }

@@ -87,6 +87,14 @@ section{
   width: 100vw;
 }
 
+::-webkit-scrollbar {
+  width: .6rem;
+
+  &-thumb{
+    background-color: $v_color-secondary;
+  }
+}
+
 //* HEADER
 .header{
   position: sticky;
@@ -299,6 +307,7 @@ body.menu-open{
     @include m_breakpoint(min, md){
       min-height: calc(100vh - 17rem);
       display: grid;
+      grid-template-rows: 1fr auto;
       align-items: center;
     }
   }
@@ -358,6 +367,7 @@ body.menu-open{
     word-wrap: break-word;
     line-height: 1;
     font-weight: 900;
+    overflow: hidden;
 
     @include m_breakpoint(max,md){
       text-align: center;
@@ -366,10 +376,7 @@ body.menu-open{
 }
 
 //* WORK
-.work{
-  display: grid;
-  grid-template-rows: 1fr auto;
-}
+
 
 //* SECTIONTITRE
 .sectionTitre{
@@ -502,17 +509,23 @@ body.menu-open{
   &__tags{
     position: relative;
     display: flex;
-    grid-gap: 1rem;
+    justify-content: flex-start;
+    grid-gap: 0 1rem;
     color: $v_color-secondary;
-    margin-top: .4rem;
-    overflow: hidden;
-    height: 2.4rem;
+    margin-top: 1rem;
+    line-height: 1;
+
+    @include m_breakpoint(min,md){
+      overflow: hidden;
+      height: 2.4rem;
+    }
 
     &>*{
       grid-gap: 1rem;
       display: inline-flex;
+      justify-content: center;
       flex-flow: row wrap;
-      margin: auto;
+      margin: 0 auto;
 
       @include m_breakpoint(min,md){
         flex-wrap: nowrap;
@@ -545,7 +558,20 @@ body .slick-next {
     z-index: 100;
 }
 
-//* ANIMATION
+//* FOOTER
+.footer{
+  display: block;
+  padding: .8rem 0;
+  font-size: 1.2rem;
+  @include rfs_margin-top(5rem);
+
+  &__container{
+    @include m_flex(row,wrap, space-between, center);
+    grid-gap: 0 1rem;
+  }
+}
+
+//? ANIMATION
 @keyframes textScrollHorizontal {
   to {
     transform: translateX(-100%);

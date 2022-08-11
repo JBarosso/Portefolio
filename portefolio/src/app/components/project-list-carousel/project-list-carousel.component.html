@@ -1,8 +1,8 @@
 <ngx-slick-carousel class="projectList carousel" #slickModal="slick-carousel" [config]="slideConfig" (init)="slickInit($event)" (breakpoint)="breakpoint($event)">
 
-  <div class="projectItem slide" data-aos="fade-up" ngxSlickItem *ngFor="let projectItem of projectList">
+  <div class="projectItem slide" ngxSlickItem *ngFor="let projectItem of projectList">
 
-    <div class="projectItem__container">
+    <div #projectItem class="projectItem__container">
 
       <h3 class="projectItem__title projectItem__title--{{projectItem.title}}">{{ projectItem.title }}</h3>
 

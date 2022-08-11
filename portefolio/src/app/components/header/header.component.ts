@@ -1,14 +1,14 @@
-import { Component, HostListener, OnInit } from '@angular/core';
-import { translateDown } from 'src/app/utilities/animations';
+import { Component, ElementRef, HostListener, OnInit, ViewChild } from '@angular/core';
 
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.scss'],
   host: {class: "header"},
-  animations: [translateDown]
 })
 export class HeaderComponent implements OnInit {
+
+  @ViewChild('header', {static: true}) header: ElementRef<HTMLDivElement>;
 
   constructor() { }
 
