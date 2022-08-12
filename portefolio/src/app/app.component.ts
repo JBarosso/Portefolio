@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, ElementRef, Inject, OnInit, QueryList, ViewChild, ViewChildren} from '@angular/core';
+import { AfterViewInit, Component, ElementRef, Inject, OnInit, ViewChild} from '@angular/core';
 import { translateDown, translateUp } from './utilities/animations';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
@@ -6,8 +6,6 @@ import { DOCUMENT } from '@angular/common';
 import { HeaderComponent } from './components/header/header.component';
 import { ProjectListCarouselComponent } from './components/project-list-carousel/project-list-carousel.component';
 import { reduce } from 'rxjs';
-
-declare const splitFunction:any;
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -65,7 +63,9 @@ export class AppComponent implements OnInit,AfterViewInit{
   }
 
   onScrollAnimation(): void{
-    let projectItems = gsap.utils.toArray(".projectItem");
+    let projectItems = gsap.utils.toArray<HTMLElement>(".projectItem");
+    let contactItems = gsap.utils.toArray<HTMLElement>('.contactItem');
+    let sections = gsap.utils.toArray<HTMLElement>('section');
 
     ScrollTrigger.matchMedia({
 
@@ -74,14 +74,40 @@ export class AppComponent implements OnInit,AfterViewInit{
           scrollTrigger: {
             trigger: '.about',
             scrub: 1.25,
-            markers: true,
             start: "5% 80%",
             end: "top 10%",
             toggleActions: "play none none none",
           }
-        })
+        });
 
         tl1.from(".about__left", {duration: 1.25, height:'0'});
+
+        contactItems.forEach(item => {
+          gsap.from(item, {
+            y: 200,
+            opacity: 0,
+            scrollTrigger: {
+              trigger: item,
+              start: "top 90%",
+              toggleActions: "restart none reverse reset",
+            }
+          })
+        });
+
+        sections.forEach(function (item){
+          gsap.fromTo(
+            item.querySelectorAll(".container"),
+            {opacity: 1},
+            {opacity: 0,
+              scrollTrigger: {
+                trigger: item.querySelectorAll(".container"),
+                scrub: 1,
+                start: "top 10%",
+                toggleActions: "restart none reverse reset",
+              }
+            }
+          )
+        })
 
         gsap.from(projectItems,{
           scrollTrigger: {

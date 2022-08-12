@@ -4,8 +4,12 @@
   $v_color-tertiary: #F9F5F1,
   $v_color-body: #1D1D21,
 
+  $v_adjust-set-color: 20,
+
   $v_font-family: "Neue Montreal",
   $v_font-family-titre: "Monument",
+
+  $v_font-size-text--3xl: 3rem,
 );
 
 //? VARIABLES
@@ -108,6 +112,12 @@ section{
     @include m_flex(row,wrap,space-between,center);
     @include rfs_padding-y(3rem);
     grid-gap: 1.6rem;
+
+    @include m_breakpoint(max, md){
+      background-color: $v_color-tertiary;
+      padding: .8rem 1.6rem;
+      margin-bottom: 3rem;
+    }
   }
 
   &__job{
@@ -302,12 +312,16 @@ body.menu-open{
   display: grid;
   grid-gap: 10rem;
 
+  @include m_breakpoint(max,md){
+    grid-gap: 8rem;
+  }
+
   &>section{
+    display: grid;
+    grid-template-rows: 1fr auto;
 
     @include m_breakpoint(min, md){
       min-height: calc(100vh - 17rem);
-      display: grid;
-      grid-template-rows: 1fr auto;
       align-items: center;
     }
   }
@@ -332,7 +346,7 @@ body.menu-open{
     @include rfs_margin-top(5rem);
 
     img{
-      width: clamp(30rem, 50%, 70rem);
+      width: clamp(50rem, 50%, 70rem);
       height: 30rem;
       object-fit: cover;
     }
@@ -389,6 +403,10 @@ body.menu-open{
     margin: 0;
     font-weight: 400;
     @include rfs_font-size(1.8rem);
+
+    @include m_breakpoint(max,sm){
+      font-size: 1.2rem;
+    }
   }
 }
 
@@ -568,6 +586,76 @@ body .slick-next {
   &__container{
     @include m_flex(row,wrap, space-between, center);
     grid-gap: 0 1rem;
+  }
+}
+
+//* CONTACT
+.contact{
+
+  &__container{
+    @include m_flex(row,wrap, space-between, center);
+    grid-gap: 3rem 1.6rem;
+  }
+
+  &__left{
+
+    h3{
+      margin: 0;
+      @include rfs_font-size(6.8rem);
+      line-height: 1.2;
+    }
+  }
+
+  &__infos{
+    @include rfs_font-size(2.6rem);
+    font-family: $v_font-family-titre;
+    line-height: 1.2;
+    margin-top: 2rem;
+  }
+
+  &__right{
+    @include m_breakpoint(max,sm){
+      width: 100%;
+    }
+  }
+}
+
+.contactList{
+  display: grid;
+  @include m_cols(2,grid,11rem);
+  align-items: flex-start;
+  justify-items: flex-start;
+  grid-gap: 1.6rem;
+}
+
+.contactItem{
+  @include rfs_font-size(4.8rem);
+  color: $v_color-primary;
+  display: inline-flex;
+  padding: .6rem .3rem .8rem .3rem;
+  position: relative;
+  line-height: 1;
+
+  &::after{
+    content: "";
+    display: block;
+    height: 0.4rem;
+    width: 100%;
+    background-color: $v_color-secondary;
+    position: absolute;
+    @include m_translate-center(X);
+    bottom: 0;
+    transition: all .3s $transition-1;
+    z-index: -1;
+  }
+
+  &:hover,
+  &:focus{
+    color: m_set-color($v_color-secondary);
+
+    &::after{
+      height: 100%;
+    }
   }
 }
 
