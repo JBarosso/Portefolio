@@ -5,7 +5,6 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { DOCUMENT } from '@angular/common';
 import { HeaderComponent } from './components/header/header.component';
 import { ProjectListCarouselComponent } from './components/project-list-carousel/project-list-carousel.component';
-import { reduce } from 'rxjs';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -27,10 +26,6 @@ export class AppComponent implements OnInit,AfterViewInit{
   //! ONINIT
   ngOnInit(): void {
     this.disableScroll(true);
-
-    //* JS SPLIT TEXT for LETTER AND WORD
-    // splitFunction('letterAnim');
-    // splitFunction('wordAnim');
   }
 
   //! AFTERVIEWINIT
@@ -66,6 +61,8 @@ export class AppComponent implements OnInit,AfterViewInit{
     let projectItems = gsap.utils.toArray<HTMLElement>(".projectItem");
     let contactItems = gsap.utils.toArray<HTMLElement>('.contactItem');
     let sections = gsap.utils.toArray<HTMLElement>('section');
+    let menuItems = gsap.utils.toArray<HTMLElement>('.nav__item a');
+    // let bgCircle = gsap.utils.toArray<HTMLElement>('.backgroundSite__circle');
 
     ScrollTrigger.matchMedia({
 
@@ -120,8 +117,78 @@ export class AppComponent implements OnInit,AfterViewInit{
           duration: 1.25,
           y: -100,
         })
-      }
+      },
 
+      "(max-width: 767px)" : function(){
+
+        gsap.to(".header__container", {
+          backgroundColor: "#F9F5F1",
+          duration: .3,
+          scrollTrigger: {
+            markers: true,
+            trigger: ".intro",
+            start: "top, 5%",
+            end: "bottom bottom",
+            toggleActions: "restart none reverse reset",
+          },
+        });
+      }
+    });
+
+    menuItems.forEach(function(item, i){
+
+      console.log("Item" + i);
+      item.onmousemove = function(event){
+        console.log(event.pageX);
+        console.log(event.pageY);
+      }
+    })
+
+    gsap.set(".backgroundSite__circle", {xPercent: -50, yPercent: -50});
+
+    var circle = document.querySelector(".backgroundSite__circle");
+    var pos = { x: window.innerWidth / 2, y: window.innerHeight / 2 };
+    var mouse = { x: pos.x, y: pos.y };
+    var speed = 0.1;
+
+    var xSet: any;
+    var ySet: any;
+
+    function circleReset(el: any){
+      el.style.width = '40px';
+      el.style.height = '40px';
+      el.style.opacity = '1';
+      el.style.top = '0';
+      el.style.right = '0';
+    }
+
+    menuItems.forEach( function(item){
+
+      item.onmouseover = function(){
+
+        xSet = gsap.quickSetter(circle, "x", "px");
+        ySet = gsap.quickSetter(circle, "y", "px");
+
+        item.onmousemove = function(e){
+          mouse.x = e.x;
+          mouse.y = e.y;
+          circleReset(circle);
+        }
+      };
+
+      item.onmouseleave = function(){
+        mouse.x = 0;
+        mouse.y = 0;
+      }
+    });
+
+    gsap.ticker.add(() => {
+      var dt = 1.0 - Math.pow(1.0 - speed, gsap.ticker.deltaRatio());
+
+      pos.x += (mouse.x - pos.x) * dt;
+      pos.y += (mouse.y - pos.y) * dt;
+      xSet(pos.x);
+      ySet(pos.y);
     });
   }
 }

@@ -40,12 +40,12 @@
         left: 50%;
         top: 50%;
         transform: translate(-50%, -50%) $more;
-    } 
+    }
     @else{
         transform: translate+#{$direction}(-50%) $more;
         @if $direction == X {
             left: 50%;
-        } 
+        }
         @else if $direction == Y {
             top: 50%;
         }
@@ -67,7 +67,7 @@
     justify-content: space-between;
     align-items: flex-start;
     grid-gap: $gap;
-    
+
     #{$cible1}{
         width: 100%;
         max-width: $img-width;
@@ -82,7 +82,7 @@
     @if $break{
 
         @include m_breakpoint(max,$break){
-            
+
             #{$cible1}{
                 max-width: 100%;
             }
@@ -91,7 +91,7 @@
 }
 
 @mixin m_mw-basis-class($img-width: 50rem, $texte-basis: 50%, $cible1: '&__left', $cible2: '&__right', $break:false){
-    
+
     #{$cible1}{
         width: 100%;
         max-width: $img-width;
@@ -106,7 +106,7 @@
     @if $break{
 
         @include m_breakpoint(max,$break){
-            
+
             #{$cible1}{
                 max-width: 100%;
             }
@@ -143,4 +143,22 @@
 @mixin m_max-width($max-width){
     width: 100%;
     max-width: $max-width;
+}
+
+//? Z index
+/// Mixin qui permet de setup un grid-row pour chaque élément
+/// @group layout
+/// @param {nbr} $step [1] - De combien est séparé chaque élément
+/// @param {nbr} $start [1] - A quel order on le 1er élément démarre
+/// @param {list} $list - Liste des éléments dans l'ordre
+/// @example @include m_z-index(1,1,'.toto','.tutu','.tata');
+@mixin m_z-index($step: 1, $start: 1, $list...){
+  $count-1: $start;
+  @each $elem in $list {
+      #{$elem}{
+          z-index: #{$count-1};
+      }
+
+    $count-1: $count-1 + $step;
+  }
 }

@@ -114,7 +114,7 @@ section{
     grid-gap: 1.6rem;
 
     @include m_breakpoint(max, md){
-      background-color: $v_color-tertiary;
+      // background-color: $v_color-tertiary;
       padding: .8rem 1.6rem;
       margin-bottom: 3rem;
     }
@@ -656,6 +656,120 @@ body .slick-next {
     &::after{
       height: 100%;
     }
+  }
+}
+
+//* BACKGROUND SITE
+.backgroundSite{
+  height: 100vh;
+  width: 100vw;
+  position: fixed;
+  left: 0;
+  top: 0;
+  z-index: -1000;
+
+  &__container{
+    display: grid;
+    height: 100%;
+
+    @include m_z-index(1,1, '.backgroundSite__fond','.backgroundSite__cloud','.backgroundSite__circle','.backgroundSite__vague');
+
+    &>*{
+      grid-row: 1/2;
+      grid-column: 1/2;
+      position: relative;
+    }
+  }
+
+  &__circle{
+    position: fixed;
+    width: clamp(15rem, 30vw, 36rem);
+    height: clamp(15rem, 30vw, 36rem);
+    right: 14%;
+    top: 5%;
+    opacity: .3;
+    transition: width, opacity, height .3s $transition-1;
+
+    svg{
+      width: 100%;
+      height: 100%;
+    }
+  }
+
+  &__fond,
+  &__vague{
+    align-self: flex-end;
+  }
+
+  &__cloud{
+    align-self: center;
+  }
+
+  &__fond,
+  &__cloud{
+    opacity: 0.05;
+  }
+}
+
+#bgCircle{
+  .cls-1 {
+    fill: $v_color-secondary;
+    fill-rule: evenodd;
+  }
+}
+
+#bgCloud{
+  .cls-1 {
+    fill: #b7b5a7;
+  }
+
+  .cls-2 {
+    fill: #fff;
+  }
+
+  .cls-3 {
+    fill: #f1efda;
+  }
+
+  .cls-1, .cls-2, .cls-3 {
+    fill-rule: evenodd;
+  }
+}
+
+#bgFond{
+  .cls-1 {
+    fill: #fbf8e4;
+    fill-rule: evenodd;
+  }
+}
+
+#bgVagues{
+  .cls-1 {
+    fill: mix($v_color-tertiary, #bbe3e2, 95%);
+
+  }
+
+  .cls-2 {
+    fill: mix($v_color-tertiary, #FFF, 95%);
+  }
+
+  .cls-3 {
+    fill: mix($v_color-tertiary, #81caf2, 95%);
+
+  }
+
+  .cls-4 {
+    fill: mix($v_color-tertiary, #4a4a50, 95%);
+
+  }
+
+  .cls-5 {
+    fill: mix($v_color-tertiary, #759cbb, 95%);
+
+  }
+
+  .cls-1, .cls-2, .cls-3, .cls-4, .cls-5 {
+    fill-rule: evenodd;
   }
 }
 
