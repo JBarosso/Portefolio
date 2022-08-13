@@ -1,14 +1,31 @@
 <div class="projectItem" *ngFor="let projectItem of projectList">
 
-  <h3 class="projectItem__title projectItem__title--{{projectItem.title}}">{{ projectItem.title }}</h3>
+  <div #projectItem class="projectItem__container">
 
-  <div class="projectItem__tags">
-    <div class="projectItem__tag projectItem__tag--{{ projectItemTag | lowercase }}" *ngFor="let projectItemTag of projectItem.tags">
-      {{projectItemTag}}
+    <h3 class="projectItem__title projectItem__title--{{projectItem.title}}">
+      <a target="_blank" href="{{ projectItem.url }}">
+        {{ projectItem.title }}
+      </a>
+    </h3>
+
+    <div class="projectItem__tags">
+      <div class="projectItem__tagsContainer">
+        <div class="projectItem__tag projectItem__tag--{{ projectItemTag | lowercase }}" *ngFor="let projectItemTag of projectItem.tags">
+          {{projectItemTag}}
+        </div>
+      </div>
+      <div class="projectItem__tagsContainer">
+        <div class="projectItem__tag projectItem__tag--{{ projectItemTag | lowercase }}" *ngFor="let projectItemTag of projectItem.tags">
+          {{projectItemTag}}
+        </div>
+      </div>
     </div>
-  </div>
 
-  <div class="projectItem__img">
-    <img src="{{ projectItem.img }}" alt="{{ projectItem.title }}">
+    <div class="projectItem__img">
+      <a target="_blank" href="{{ projectItem.url }}">
+        <img src="{{ projectItem.img }}" alt="{{ projectItem.title }}">
+      </a>
+    </div>
+
   </div>
 </div>

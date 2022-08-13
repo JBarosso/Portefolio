@@ -11,6 +11,8 @@ import { HeaderComponent } from './components/header/header.component';
 import { FooterComponent } from './components/footer/footer.component';
 import { SlickCarouselModule } from 'ngx-slick-carousel';
 import { ProjectListCarouselComponent } from './components/project-list-carousel/project-list-carousel.component';
+import { ProjectDetailComponent } from './components/project-detail/project-detail.component';
+import { PageNotFoundComponent } from './components/page-not-found/page-not-found.component';
 
 @NgModule({
   declarations: [
@@ -21,6 +23,8 @@ import { ProjectListCarouselComponent } from './components/project-list-carousel
     HeaderComponent,
     FooterComponent,
     ProjectListCarouselComponent,
+    ProjectDetailComponent,
+    PageNotFoundComponent,
   ],
   imports: [
     BrowserModule,

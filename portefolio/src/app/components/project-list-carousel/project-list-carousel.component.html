@@ -4,7 +4,11 @@
 
     <div #projectItem class="projectItem__container">
 
-      <h3 class="projectItem__title projectItem__title--{{projectItem.title}}">{{ projectItem.title }}</h3>
+      <h3 class="projectItem__title projectItem__title--{{projectItem.title}}">
+        <a target="_blank" href="{{ projectItem.url }}">
+          {{ projectItem.title }}
+        </a>
+      </h3>
 
       <div class="projectItem__tags">
         <div class="projectItem__tagsContainer">
@@ -20,7 +24,9 @@
       </div>
 
       <div class="projectItem__img">
-        <img src="{{ projectItem.img }}" alt="{{ projectItem.title }}">
+        <a target="_blank" href="{{ projectItem.url }}">
+          <img src="{{ projectItem.img }}" alt="{{ projectItem.title }}">
+        </a>
       </div>
 
     </div>

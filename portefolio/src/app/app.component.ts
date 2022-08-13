@@ -61,8 +61,7 @@ export class AppComponent implements OnInit,AfterViewInit{
     let projectItems = gsap.utils.toArray<HTMLElement>(".projectItem");
     let contactItems = gsap.utils.toArray<HTMLElement>('.contactItem');
     let sections = gsap.utils.toArray<HTMLElement>('section');
-    let menuItems = gsap.utils.toArray<HTMLElement>('.nav__item a');
-    // let bgCircle = gsap.utils.toArray<HTMLElement>('.backgroundSite__circle');
+    let bgCircle = gsap.utils.toArray<HTMLElement>('.backgroundSite__circle');
 
     ScrollTrigger.matchMedia({
 
@@ -125,70 +124,78 @@ export class AppComponent implements OnInit,AfterViewInit{
           backgroundColor: "#F9F5F1",
           duration: .3,
           scrollTrigger: {
-            markers: true,
             trigger: ".intro",
             start: "top, 5%",
             end: "bottom bottom",
             toggleActions: "restart none reverse reset",
           },
         });
+      },
+
+      "(min-width: 992px)" : function(){
+
+        //* Animation cercle hover menu
+        let tlCircle = gsap.timeline({ paused: true });
+
+        tlCircle.to(bgCircle,{
+          duration: .2,
+          opacity: 1,
+          width: 40,
+          height: 40,
+          xPercent: -50,
+          yPercent: -50,
+          stagger: 0.3,
+        });
+
+        let nav = gsap.utils.toArray<HTMLElement>('.nav');
+
+        nav.forEach(function (item) {
+
+          item.addEventListener("mousemove", (e) => {
+            tlCircle.play();
+            gsap.to(bgCircle,{
+              x: e.pageX,
+              y: e.pageY - document.documentElement.scrollTop,
+            })
+          })
+
+          item.addEventListener("mouseleave", (e) => {
+            tlCircle.reverse();
+            gsap.to(bgCircle,{
+              x: window.innerWidth - (window.innerWidth * 0.14) * 2,
+              y: "10%",
+            })
+          })
+        });
       }
     });
 
-    menuItems.forEach(function(item, i){
+    //* Animation image projectItem
+    // gsap.set('.projectItem__img', { yPercent: -50, xPercent: -50 })
+    // gsap.utils.toArray(".projectItem").forEach((el:any) => {
 
-      console.log("Item" + i);
-      item.onmousemove = function(event){
-        console.log(event.pageX);
-        console.log(event.pageY);
-      }
-    })
+    //   console.log(el.offsetLeft);
 
-    gsap.set(".backgroundSite__circle", {xPercent: -50, yPercent: -50});
+    //   const image = el.querySelector('.projectItem__img'),
+    //   setX = gsap.quickSetter(image, "x", "px"),
+    //   setY = gsap.quickSetter(image, "y", "px"),
+    //   align = (e:any) => {
+    //     setX(e.pageX);
+    //     setY(e.pageY);
+    //   },
+    //   startFollow = () => document.addEventListener("mousemove", align),
+    //   stopFollow = () => document.removeEventListener("mousemove", align),
+    //   fade = gsap.to(image, {autoAlpha: 1, ease: "none", paused: true, onReverseComplete: stopFollow});
 
-    var circle = document.querySelector(".backgroundSite__circle");
-    var pos = { x: window.innerWidth / 2, y: window.innerHeight / 2 };
-    var mouse = { x: pos.x, y: pos.y };
-    var speed = 0.1;
+    //   el.addEventListener('mouseenter', (e:any) => {
+    //     fade.play();
+    //     startFollow();
+    //     align(e);
+    //   });
 
-    var xSet: any;
-    var ySet: any;
+    //   el.addEventListener('mouseleave', () => fade.reverse());
 
-    function circleReset(el: any){
-      el.style.width = '40px';
-      el.style.height = '40px';
-      el.style.opacity = '1';
-      el.style.top = '0';
-      el.style.right = '0';
-    }
+    // });
 
-    menuItems.forEach( function(item){
-
-      item.onmouseover = function(){
-
-        xSet = gsap.quickSetter(circle, "x", "px");
-        ySet = gsap.quickSetter(circle, "y", "px");
-
-        item.onmousemove = function(e){
-          mouse.x = e.x;
-          mouse.y = e.y;
-          circleReset(circle);
-        }
-      };
-
-      item.onmouseleave = function(){
-        mouse.x = 0;
-        mouse.y = 0;
-      }
-    });
-
-    gsap.ticker.add(() => {
-      var dt = 1.0 - Math.pow(1.0 - speed, gsap.ticker.deltaRatio());
-
-      pos.x += (mouse.x - pos.x) * dt;
-      pos.y += (mouse.y - pos.y) * dt;
-      xSet(pos.x);
-      ySet(pos.y);
-    });
   }
 }

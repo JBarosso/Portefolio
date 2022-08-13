@@ -522,6 +522,10 @@ body.menu-open{
     line-height: 1;
     margin: 0;
     text-align: center;
+
+    a{
+      color: $v_color-primary;
+    }
   }
 
   &__tags{
@@ -562,8 +566,13 @@ body.menu-open{
 
   &__img{
     position: absolute;
+    z-index: 1;
+    width: 90%;
     opacity: 0;
-    z-index: -1;
+
+    img{
+      width: 100%;
+    }
   }
 }
 
@@ -685,8 +694,7 @@ body .slick-next {
     position: fixed;
     width: clamp(15rem, 30vw, 36rem);
     height: clamp(15rem, 30vw, 36rem);
-    right: 14%;
-    top: 5%;
+    transform: translate(calc(100vw - 114%), 10%);
     opacity: .3;
     transition: width, opacity, height .3s $transition-1;
 
@@ -701,13 +709,27 @@ body .slick-next {
     align-self: flex-end;
   }
 
+  &__fond,
+  &__cloud{
+    opacity: 0.05;
+
+    @include m_breakpoint(max,md){
+      opacity: 0.3;
+    }
+  }
+
   &__cloud{
     align-self: center;
   }
 
-  &__fond,
-  &__cloud{
-    opacity: 0.05;
+  &__vague{
+
+    svg{
+
+      @include m_breakpoint(min, md){
+        width: 120vw;
+      }
+    }
   }
 }
 

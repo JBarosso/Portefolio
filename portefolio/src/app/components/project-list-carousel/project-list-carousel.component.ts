@@ -20,7 +20,7 @@ export class ProjectListCarouselComponent implements OnInit {
     prevArrow: "<div class='carouselBtn carouselBtn--prev'>Prev</div>",
     infinite: true,
     arrows: true,
-    autoplay: true,
+    autoplay: false,
     autoplaySpeed: 3000,
     cssEase: "cubic-bezier(0.62,0.05,0.01,0.99)",
     speed: 1250,

@@ -1,0 +1,31 @@
+<div class="projectItemDetail" *ngFor="let projectItem of projectList">
+
+  <div class="projectItemDetail__container">
+
+    <h3 class="projectItemDetail__title projectItemDetail__title--{{projectItem.title}}">
+      <a target="_blank" href="{{ projectItem.url }}">
+        {{ projectItem.title }}
+      </a>
+    </h3>
+
+    <div class="projectItemDetail__tags">
+      <div class="projectItemDetail__tagsContainer">
+        <div class="projectItemDetail__tag projectItemDetail__tag--{{ projectItemTag | lowercase }}" *ngFor="let projectItemTag of projectItem.tags">
+          {{projectItemTag}}
+        </div>
+      </div>
+      <div class="projectItemDetail__tagsContainer">
+        <div class="projectItemDetail__tag projectItemDetail__tag--{{ projectItemTag | lowercase }}" *ngFor="let projectItemTag of projectItem.tags">
+          {{projectItemTag}}
+        </div>
+      </div>
+    </div>
+
+    <div class="projectItemDetail__img">
+      <a target="_blank" href="{{ projectItem.url }}">
+        <img src="{{ projectItem.img }}" alt="{{ projectItem.title }}">
+      </a>
+    </div>
+
+  </div>
+</div>
