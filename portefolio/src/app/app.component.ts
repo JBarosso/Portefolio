@@ -7,7 +7,6 @@ import { HeaderComponent } from './components/header/header.component';
 import { ProjectListCarouselComponent } from './components/project-list-carousel/project-list-carousel.component';
 
 gsap.registerPlugin(ScrollTrigger);
-
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -30,8 +29,13 @@ export class AppComponent implements OnInit,AfterViewInit{
 
   //! AFTERVIEWINIT
   ngAfterViewInit(): void {
-    this.initAnimations();
+
+    if(window.innerWidth > 767){
+      this.initAnimations();
+    }
     this.onScrollAnimation();
+    // this.splitText("word");
+    // this.splitText("letter");
   }
 
   //! FUNCTION
@@ -46,18 +50,47 @@ export class AppComponent implements OnInit,AfterViewInit{
   }
 
   initAnimations(): void{
-    gsap.from(this.elHeader.header.nativeElement.childNodes, {
+    let wordWrapper = document.querySelectorAll(".word__wrapper");
+    let introImgContainer = document.querySelectorAll(".intro__img");
+    let introImg = document.querySelectorAll(".intro__img img");
+    gsap.set(introImgContainer, {autoAlpha: 0});
+
+    let tl = gsap.timeline({
+      scrollTrigger: {
+        trigger: 'body'
+      },
+      onComplete: () => this.disableScroll(false)
+    });
+
+    tl.from(this.elHeader.header.nativeElement.childNodes, {
       delay: 0.7,
       duration: 1.25,
       ease: 'cubic-bezier(0.62,0.05,0.01,0.99)',
       y: '-100%',
       opacity: 0,
       stagger: 0,
-      onComplete: () => this.disableScroll(false)
+    }),
+    wordWrapper.forEach((item) =>{
+      const word = item.querySelector(".word__anim");
+
+      tl.from(word, .6, {
+        yPercent: 100,
+      })
+    }),
+    tl.set(introImgContainer, {autoAlpha: 1})
+    .from( introImgContainer, 1.5, {
+      xPercent: -100,
     })
+    .from(introImg, 1.5, {
+      xPercent: 100,
+      scale: 1.3,
+      delay: -1.5,
+    });
   }
 
   onScrollAnimation(): void{
+    let wordAnim1 = gsap.utils.toArray<HTMLElement>(".sectionTitre__container");
+    let wordAnim2 = gsap.utils.toArray<HTMLElement>(".wordWrapper");
     let projectItems = gsap.utils.toArray<HTMLElement>(".projectItem");
     let contactItems = gsap.utils.toArray<HTMLElement>('.contactItem');
     let sections = gsap.utils.toArray<HTMLElement>('section');
@@ -116,6 +149,35 @@ export class AppComponent implements OnInit,AfterViewInit{
           duration: 1.25,
           y: -100,
         })
+
+        wordAnim1.forEach((item) =>{
+          const word = item.querySelector(".letterAnim");
+
+          gsap.from(word, .6, {
+            yPercent: 100,
+            duration: .6,
+            scrollTrigger:{
+              trigger: item,
+              start: "-=50 90%",
+              toggleActions: "restart none reverse reset",
+            }
+          })
+        })
+
+        wordAnim2.forEach((item) =>{
+          const word = item.querySelector(".wordAnim");
+
+          gsap.from(word, .6, {
+            yPercent: 100,
+            duration: .6,
+            delay: .6,
+            scrollTrigger:{
+              trigger: item,
+              start: "-=30 90%",
+              toggleActions: "restart none reverse reset",
+            }
+          })
+        })
       },
 
       "(max-width: 767px)" : function(){
@@ -170,32 +232,42 @@ export class AppComponent implements OnInit,AfterViewInit{
       }
     });
 
-    //* Animation image projectItem
-    // gsap.set('.projectItem__img', { yPercent: -50, xPercent: -50 })
-    // gsap.utils.toArray(".projectItem").forEach((el:any) => {
+  }
 
-    //   console.log(el.offsetLeft);
+  //* En cours
+  splitText(target: string): void{
+    const letterAnims = this.document.querySelectorAll(".letterAnim");
+    const wordAnims = this.document.querySelectorAll(".wordAnim");
 
-    //   const image = el.querySelector('.projectItem__img'),
-    //   setX = gsap.quickSetter(image, "x", "px"),
-    //   setY = gsap.quickSetter(image, "y", "px"),
-    //   align = (e:any) => {
-    //     setX(e.pageX);
-    //     setY(e.pageY);
-    //   },
-    //   startFollow = () => document.addEventListener("mousemove", align),
-    //   stopFollow = () => document.removeEventListener("mousemove", align),
-    //   fade = gsap.to(image, {autoAlpha: 1, ease: "none", paused: true, onReverseComplete: stopFollow});
+    if(target == "word"){
 
-    //   el.addEventListener('mouseenter', (e:any) => {
-    //     fade.play();
-    //     startFollow();
-    //     align(e);
-    //   });
+      wordAnims.forEach((text) =>{
+        const textHtml = text.textContent;
+        const result = textHtml!.split(/(\s+)/);
 
-    //   el.addEventListener('mouseleave', () => fade.reverse());
+        result.forEach((item) => {
+          console.log(item);
+          text.innerHTML += ("<span>"+ item +"</span>");
+        })
+      })
+    }
 
-    // });
+    if(target == "letter"){
+
+      letterAnims.forEach((text) =>{
+        const textHtml = text.textContent;
+        const result = textHtml!.split(/(\s+)/);
+
+        result.forEach((item) => {
+          const letterResult = item!.split("");
+
+          letterResult.forEach((letter) =>{
+            text.innerHTML += ("<span>"+ letter +"</span>");
+          })
+        })
+      })
+    }
+
 
   }
 }

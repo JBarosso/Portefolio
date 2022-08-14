@@ -1,5 +1,5 @@
-import { Component, ElementRef, HostListener, OnInit, ViewChild } from '@angular/core';
-import { AppComponent } from 'src/app/app.component';
+import { DOCUMENT } from '@angular/common';
+import { Component, ElementRef, HostListener, Inject, OnInit, ViewChild } from '@angular/core';
 
 @Component({
   selector: 'app-header',
@@ -11,7 +11,7 @@ export class HeaderComponent implements OnInit {
 
   @ViewChild('header', {static: true}) header: ElementRef<HTMLDivElement>;
 
-  constructor() { }
+  constructor(@Inject(DOCUMENT) private document: Document) { }
 
   ngOnInit(): void {
   }
@@ -26,6 +26,17 @@ export class HeaderComponent implements OnInit {
     }
     else{
       this.window_scroll = false;
+    }
+  }
+
+  //? TOGGLE MENU RESPONSIVE
+  toggleMenuStatus: boolean = false;
+  toggleMenu(){
+    this.toggleMenuStatus = !this.toggleMenuStatus;
+    if(this.toggleMenuStatus){
+      this.document.querySelector('body')!.style.overflowY = 'hidden';
+    } else {
+      this.document.querySelector('body')!.style.overflowY = 'auto';
     }
   }
 }
