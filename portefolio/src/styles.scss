@@ -212,6 +212,28 @@ section{
       .header__nav{
         transform: translate(0px, 0%) scale(1, 1) !important;
       }
+
+      .nav__burger{
+
+        path.line{
+
+          &1{
+            stroke-dasharray: 90 207;
+            stroke-dashoffset: -134;
+            stroke-width: 6;
+          }
+          &2{
+            stroke-dasharray: 1 60;
+            stroke-dashoffset: -30;
+            stroke-width: 8;
+          }
+          &3{
+            stroke-dasharray: 90 207;
+            stroke-dashoffset: -134;
+            stroke-width: 6;
+          }
+        }
+      }
     }
   }
 
@@ -230,8 +252,6 @@ section{
       display: none;
     }
   }
-
-
 }
 
 .nav{
@@ -584,6 +604,7 @@ body.menu-open{
     z-index: 1;
     width: 90%;
     opacity: 0;
+    visibility: hidden;
 
     img{
       width: 100%;
@@ -827,7 +848,7 @@ body .slick-next {
 .wordWrapper{
   display: inline-block;
   overflow: hidden;
-  line-height: 1;
+  line-height: 1.1;
 }
 
 .wordAnim{
