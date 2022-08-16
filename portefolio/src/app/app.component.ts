@@ -100,7 +100,7 @@ export class AppComponent implements OnInit,AfterViewInit{
         e.preventDefault();
         
         gsap.to(window, {
-          scrollTo: targetRect.top,
+          scrollTo: targetRect.top - 100,
         });
       })
     })
