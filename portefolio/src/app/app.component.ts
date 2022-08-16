@@ -2,11 +2,12 @@ import { AfterViewInit, Component, ElementRef, Inject, OnInit, ViewChild} from '
 import { translateDown, translateUp } from './utilities/animations';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import { ScrollToPlugin } from 'gsap/ScrollToPlugin';
 import { DOCUMENT } from '@angular/common';
 import { HeaderComponent } from './components/header/header.component';
 import { ProjectListCarouselComponent } from './components/project-list-carousel/project-list-carousel.component';
 
-gsap.registerPlugin(ScrollTrigger);
+gsap.registerPlugin(ScrollTrigger, ScrollToPlugin);
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -20,7 +21,9 @@ export class AppComponent implements OnInit,AfterViewInit{
   @ViewChild(HeaderComponent) elHeader !: HeaderComponent;
   @ViewChild(ProjectListCarouselComponent) elProjectlist !: ProjectListCarouselComponent;
 
-  constructor(@Inject(DOCUMENT) private document: Document){}
+  constructor(@Inject(DOCUMENT) private document: Document){
+    
+  }
 
   //! ONINIT
   ngOnInit(): void {
@@ -86,6 +89,21 @@ export class AppComponent implements OnInit,AfterViewInit{
       scale: 1.3,
       delay: -1.5,
     });
+
+    //? SCROLL ANCHOR NAV
+    this.document.querySelectorAll(".nav a").forEach((item:any) => {
+      const target = item.getAttribute("href");
+      const targetEl = document.querySelector(target);
+      const targetRect = targetEl.getBoundingClientRect();
+
+      item.addEventListener("click", (e:any) => {
+        e.preventDefault();
+        
+        gsap.to(window, {
+          scrollTo: targetRect.top,
+        });
+      })
+    })
   }
 
   onScrollAnimation(): void{
